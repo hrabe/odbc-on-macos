@@ -32,19 +32,19 @@ Second: iODBC is **not** available for Microsoft Windows, so you are not able to
 
 ## Supported DBMS
 
-1. MSSQL Server
-1. PostgreSQL Server
-1. Oracale Server
-1. MySQL Server
-1. Firebird Server
-1. SQLite (file based, full scope)
-1. MS Access (file based, read only)
+1. [MSSQL Server](https://github.com/hrabe/odbc-on-macos#mssql-server)
+1. [PostgreSQL Server](https://github.com/hrabe/odbc-on-macos#postgresql-server)
+1. [Oracle Server](https://github.com/hrabe/odbc-on-macos#oracle-server)
+1. [MySQL Server](https://github.com/hrabe/odbc-on-macos#mysql-server)
+1. [Firebird Server](https://github.com/hrabe/odbc-on-macos#firebird-server)
+1. [SQLite (file based, full scope)](https://github.com/hrabe/odbc-on-macos#sqlite-file-based-full-scope)
+1. [MS Access (file based, read only)](https://github.com/hrabe/odbc-on-macos#ms-access-file-based-read-only)
 
 ## MSSQL Server
 
 ## PostgreSQL Server
 
-## Oracale Server
+## Oracle Server
 
 ## MySQL Server
 
