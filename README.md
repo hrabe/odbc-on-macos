@@ -132,6 +132,43 @@ Driver                 = FreeTDS
 Servername             = MSSQLServer
 ```
 
+### Use MSSQL Server via Docker Image
+
+Microsoft provides [official images for Microsoft SQL Server on Linux for Docker Engine](https://hub.docker.com/r/microsoft/mssql-server-linux/). For detailed desciption about given environment vars please read the docker image description.
+
+#### Server Connect Parameter
+| Parameter | Value |
+| --- | --- |
+| Host | localhost |
+| Port | 1433 |
+| User | sa |
+| Password | yourStrong(!)Password |
+
+#### Download Image
+```
+docker pull microsoft/mssql-server-linux:latest
+```
+
+#### Create a Test Server Container
+```
+docker create -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQL_PID=Developer' -e 'no_proxy=*.local, 169.254/16' -p 1433:1433 --name test-db-mssql -d microsoft/mssql-server-linux:latest
+```
+
+#### Start Test Server Container
+```
+docker start test-db-mssql
+```
+
+#### Stop Test Server Container
+```
+docker stop test-db-mssql
+```
+
+#### Destroy Test Server Container
+```
+docker rm test-db-mssql
+```
+
 ## PostgreSQL Server
 
 ## Oracle Server
