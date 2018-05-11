@@ -39,3 +39,19 @@ Second: iODBC is **not** available for Microsoft Windows, so you are not able to
 1. Firebird Server
 1. SQLite (file based, full scope)
 1. MS Access (file based, read only)
+
+## MSSQL Server
+
+## PostgreSQL Server
+
+## Oracale Server
+
+## MySQL Server
+
+## Firebird Server
+
+## SQLite (file based, full scope)
+
+## MS Access (file based, read only)
+
+
