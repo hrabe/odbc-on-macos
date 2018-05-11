@@ -32,19 +32,19 @@ Second: iODBC is **not** available for Microsoft Windows, so you are not able to
 
 ## Prerequisites
 
-### Docker Community Edition
+### Install Docker Community Edition
 
 To test the ODBC drivers against databases we will use docker images/container to start/stop the required database servers.
 Please download [Docker for Mac](https://docs.docker.com/docker-for-mac/install/) and install it.
 
-### Homebrew
+### Install Homebrew
 
 Install [Homebrew](https://brew.sh/):
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
  
-### unixODBC
+### Install unixODBC
 
 Install [unixODBC](http://www.unixodbc.org/) for MacOS using [Homebrew](https://brew.sh/):
 ```
@@ -78,6 +78,60 @@ SQLSETPOSIROW Size.: 8
 1. [MS Access (file based, read only)](https://github.com/hrabe/odbc-on-macos#ms-access-file-based-read-only)
 
 ## MSSQL Server
+
+### Install ODBC driver 
+MSSQL Server (and also Sybase) can be accessed using the FreeTDS driver available at [Homebrew](https://brew.sh/):
+```
+brew install freetds --with-unixodbc
+```
+
+### Edit FreeTDS configuration file
+Check the location of **freetds.conf** with `tsql -C`. Should get as example:
+```
+Compile-time settings (established with the "configure" script)
+                            Version: freetds v1.00.91
+             freetds.conf directory: /usr/local/etc
+     MS db-lib source compatibility: no
+        Sybase binary compatibility: no
+                      Thread safety: yes
+                      iconv library: yes
+                        TDS version: 7.3
+                              iODBC: no
+                           unixodbc: yes
+              SSPI "trusted" logins: no
+                           Kerberos: no
+                            OpenSSL: yes
+                             GnuTLS: no
+                               MARS: no
+```
+
+Now edit `/usr/local/etc/freetds.conf` and append:
+```
+# our MSSQL server
+[MSSQLServer]
+host = localhost
+port = 1433
+tds version = 7.3
+```
+
+### Edit ODBC driver manager file
+Edit the located [odbcinst.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) (eg. `/usr/local/etc/odbcinst.ini`) and append:
+```
+[FreeTDS]
+Description     = FreeTDS Driver for Linux & MSSQL
+Driver          = /usr/local/lib/libtdsodbc.so
+Setup           = /usr/local/lib/libtdsodbc.so
+UsageCount      = 1
+```
+
+### Edit ODBC Data Source file
+You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) or user [.odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) file. I prefere system, so as example edit `/usr/local/etc/odbc.ini` and append:
+```
+[MSSQL]
+Description            = Test to SQLServer
+Driver                 = FreeTDS
+Servername             = MSSQLServer
+```
 
 ## PostgreSQL Server
 
