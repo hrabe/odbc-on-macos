@@ -30,6 +30,43 @@ With this statement from Apple you have to install one of the ODBC SDK's in any 
 
 Second: iODBC is **not** available for Microsoft Windows, so you are not able to create real cross platform code bases.
 
+## Prerequisites
+
+### Docker Community Edition
+
+To test the ODBC drivers against databases we will use docker images/container to start/stop the required database servers.
+Please download [Docker for Mac](https://docs.docker.com/docker-for-mac/install/) and install it.
+
+### Homebrew
+
+Install [Homebrew](https://brew.sh/):
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+ 
+### unixODBC
+
+Install [unixODBC](http://www.unixodbc.org/) for MacOS using [Homebrew](https://brew.sh/):
+```
+brew install unixodbc
+```
+
+### Locate your odbc driver and data source config files
+
+We need the location for later modification to setup ODBC driver and Test DSN entries. Run `odbcinst -j` to get the location of the **odbcinst.ini** and **odbc.ini** files. You should get as example:
+
+```
+unixODBC 2.3.6
+DRIVERS............: /usr/local/etc/odbcinst.ini
+SYSTEM DATA SOURCES: /usr/local/etc/odbc.ini
+FILE DATA SOURCES..: /usr/local/etc/ODBCDataSources
+USER DATA SOURCES..: /Users/heikorabe/.odbc.ini
+SQLULEN Size.......: 8
+SQLLEN Size........: 8
+SQLSETPOSIROW Size.: 8
+```
+
+
 ## Supported DBMS
 
 1. [MSSQL Server](https://github.com/hrabe/odbc-on-macos#mssql-server)
