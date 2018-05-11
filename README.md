@@ -107,14 +107,13 @@ Compile-time settings (established with the "configure" script)
 
 Now edit `/usr/local/etc/freetds.conf` and append:
 ```
-# our MSSQL server
 [MSSQLServer]
 host = localhost
 port = 1433
 tds version = 7.3
 ```
 
-### Edit ODBC driver manager file
+### Edit ODBC Driver Manager file
 Edit the located [odbcinst.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) (eg. `/usr/local/etc/odbcinst.ini`) and append:
 ```
 [FreeTDS]
