@@ -51,7 +51,7 @@ Install [unixODBC](http://www.unixodbc.org/) for MacOS using [Homebrew](https://
 brew install unixodbc
 ```
 
-### Locate your odbc driver and data source config files
+### Locate your ODBC Driver and Data Source config files
 
 We need the location for later modification to setup ODBC driver and Test DSN entries. Run `odbcinst -j` to get the location of the **odbcinst.ini** and **odbc.ini** files. You should get as example:
 
