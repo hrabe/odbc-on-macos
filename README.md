@@ -124,7 +124,7 @@ UsageCount      = 1
 ```
 
 ### Edit ODBC Data Source file
-You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) or user [.odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) file. I prefere system, so as example edit `/usr/local/etc/odbc.ini` and append:
+You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) or user [.odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) file. As example edit `/usr/local/etc/odbc.ini` and append:
 ```
 [MSSQL]
 Description            = Test to SQLServer
