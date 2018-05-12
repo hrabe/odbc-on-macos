@@ -120,7 +120,7 @@ UsageCount      = 1
 You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) or user [.odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) file. As example edit your user file `~/.odbc.ini` and append:
 ```
 [DSN_MSSQL]
-Description            = Test to SQLServer
+Description            = Test Server MSSQL
 Driver                 = FreeTDS
 Servername             = MSSQLServer
 ```
