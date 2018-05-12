@@ -9,13 +9,11 @@ An application written using ODBC can be ported to other platforms, both on the 
 with few changes to the data access code.
 
 ### Implementation as _iODBC_
-
 [iODBC](http://www.iodbc.org/) is an open source initiative managed by OpenLink Software. 
 It is a platform-independent ODBC SDK and runtime offering that enables the development of ODBC-compliant 
 applications and drivers outside the Windows platform. ([History](https://en.wikipedia.org/wiki/IODBC#History))
 
 ### Implementation as _unixODBC_
-
 [unixODBC](http://www.unixodbc.org/) is an open source project that implements the ODBC API. 
 The code is provided under the GNU GPL/LGPL and can be built and used on many different operating systems,
 including most versions of Unix, Linux, Mac OS X, IBM OS/2 and Microsoft's Interix. ([History](https://en.wikipedia.org/wiki/UnixODBC#History))
@@ -33,7 +31,6 @@ Second: iODBC is **not** available for Microsoft Windows, so you are not able to
 ## Prerequisites
 
 ### Install Docker Community Edition
-
 To test the ODBC drivers against databases we will use docker images/container to start/stop the required database servers.
 Please download [Docker for Mac](https://docs.docker.com/docker-for-mac/install/) and install it.
 
@@ -45,16 +42,13 @@ Install [Homebrew](https://brew.sh/):
 ```
  
 ### Install unixODBC
-
 Install [unixODBC](http://www.unixodbc.org/) for MacOS using [Homebrew](https://brew.sh/):
 ```
 brew install unixodbc
 ```
 
 ### Locate your ODBC Driver and Data Source config files
-
 We need the location for later modification to setup ODBC driver and Test DSN entries. Run `odbcinst -j` to get the location of the **odbcinst.ini** and **odbc.ini** files. You should get as example:
-
 ```
 unixODBC 2.3.6
 DRIVERS............: /usr/local/etc/odbcinst.ini
@@ -68,7 +62,6 @@ SQLSETPOSIROW Size.: 8
 
 
 ## Supported DBMS
-
 1. [MSSQL Server](https://github.com/hrabe/odbc-on-macos#mssql-server)
 1. [PostgreSQL Server](https://github.com/hrabe/odbc-on-macos#postgresql-server)
 1. [Oracle Server](https://github.com/hrabe/odbc-on-macos#oracle-server)
@@ -124,25 +117,24 @@ UsageCount      = 1
 ```
 
 ### Edit ODBC Data Source file
-You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) or user [.odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) file. As example edit `/usr/local/etc/odbc.ini` and append:
+You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) or user [.odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) file. As example edit your user file `~/.odbc.ini` and append:
 ```
-[MSSQL]
+[DSN_MSSQL]
 Description            = Test to SQLServer
 Driver                 = FreeTDS
 Servername             = MSSQLServer
 ```
 
 ### Use MSSQL Server via Docker Image
-
 Microsoft provides [official images for Microsoft SQL Server on Linux for Docker Engine](https://hub.docker.com/r/microsoft/mssql-server-linux/). For detailed desciption about given environment vars please read the docker image description.
 
-#### Server Connect Parameter
-| Parameter | Value |
-| --- | --- |
-| Host | localhost |
-| Port | 1433 |
-| User | sa |
-| Password | yourStrong(!)Password |
+#### Server Parameter for ODBC connects
+```
+Host    : localhost
+Port    : 1433
+User    : sa
+Password: yourStrong(!)Password
+```
 
 #### Download Image
 ```
@@ -156,6 +148,27 @@ docker create -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQ
 
 #### Using the Test Server Container
 The Container created is named **test-db-mssql**. You can start the server by run `docker start test-db-mssql`, shutdown the server by run `docker stop test-db-mssql` and destroy the server container by run `docker rm test-db-mssql`.
+
+#### Verify ODBC installation using running Server Container
+[unixODBC](http://www.unixodbc.org/) comes with a command line tool to interact with DBMS via ODBC DSN. You can run it using the Server parameter shown above:
+
+```
+isql DSN_MSSQL sa 'yourStrong(!)Password'
+```
+
+You should get on success case:
+```
++---------------------------------------+
+| Connected!                            |
+|                                       |
+| sql-statement                         |
+| help [tablename]                      |
+| quit                                  |
+|                                       |
++---------------------------------------+
+SQL>
+```
+
 
 ## PostgreSQL Server
 
