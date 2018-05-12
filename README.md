@@ -61,13 +61,13 @@ SQLSETPOSIROW Size.: 8
 ```
 
 ## Manual Setup - the complete, hard way
-1. [MSSQL Server](https://github.com/hrabe/odbc-on-macos#mssql-server)
-1. [PostgreSQL Server](https://github.com/hrabe/odbc-on-macos#postgresql-server)
-1. [Oracle Server](https://github.com/hrabe/odbc-on-macos#oracle-server)
-1. [MySQL Server](https://github.com/hrabe/odbc-on-macos#mysql-server)
-1. [Firebird Server](https://github.com/hrabe/odbc-on-macos#firebird-server)
-1. [SQLite (file based, full scope)](https://github.com/hrabe/odbc-on-macos#sqlite-file-based-full-scope)
-1. [MS Access (file based, read only)](https://github.com/hrabe/odbc-on-macos#ms-access-file-based-read-only)
+1. [MSSQL Server](https://github.com/hrabe/odbc-on-macos/blob/master/manual/mssql.md)
+1. [PostgreSQL Server](https://github.com/hrabe/odbc-on-macos/blob/master/manual/postgresql.md)
+1. [Oracle Server](https://github.com/hrabe/odbc-on-macos/blob/master/manual/oracle.md)
+1. [MySQL Server](https://github.com/hrabe/odbc-on-macos/blob/master/manual/mysql.md)
+1. [Firebird Server](https://github.com/hrabe/odbc-on-macos/blob/master/manual/firebird.md)
+1. [SQLite (file based, full scope)](https://github.com/hrabe/odbc-on-macos/blob/master/manual/sqlite.md)
+1. [MS Access (file based, read only)](https://github.com/hrabe/odbc-on-macos/blob/master/manual/msaccess.md)
 
 
 ## Automatic Setup - The easy, lazy way
