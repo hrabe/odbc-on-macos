@@ -86,7 +86,7 @@ brew install freetds --with-unixodbc
 ```
 
 ### Edit FreeTDS configuration file
-Check the location of **freetds.conf** with `tsql -C`. Should get as example:
+Check the location of **freetds.conf** by run `tsql -C`. Should get as example:
 ```
 Compile-time settings (established with the "configure" script)
                             Version: freetds v1.00.91
@@ -154,20 +154,8 @@ docker pull microsoft/mssql-server-linux:latest
 docker create -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQL_PID=Developer' -e 'no_proxy=*.local, 169.254/16' -p 1433:1433 --name test-db-mssql -d microsoft/mssql-server-linux:latest
 ```
 
-#### Start Test Server Container
-```
-docker start test-db-mssql
-```
-
-#### Stop Test Server Container
-```
-docker stop test-db-mssql
-```
-
-#### Destroy Test Server Container
-```
-docker rm test-db-mssql
-```
+#### Using the Test Server Container
+The Container created is named **test-db-mssql**. You can start the server by run `docker start test-db-mssql`, shutdown the server by run `docker stop test-db-mssql` and destroy the server container by run `docker rm test-db-mssql`.
 
 ## PostgreSQL Server
 
