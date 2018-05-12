@@ -38,7 +38,7 @@ tds version = 7.3
 ## Edit ODBC Driver Manager file
 Edit the located [odbcinst.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) (eg. `/usr/local/etc/odbcinst.ini`) and append:
 ```
-[FreeTDS]
+[FreeTDS Driver]
 Description     = FreeTDS Driver for Linux & MSSQL
 Driver          = /usr/local/lib/libtdsodbc.so
 Setup           = /usr/local/lib/libtdsodbc.so
@@ -50,7 +50,7 @@ You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#
 ```
 [DSN_MSSQL]
 Description            = Test Server MSSQL
-Driver                 = FreeTDS
+Driver                 = FreeTDS Driver
 Servername             = MSSQLServer
 ```
 
