@@ -94,7 +94,7 @@ docker rm test-db-mssql
 ```
 
 ### Verify ODBC installation using running Server Container
-[unixODBC](http://www.unixodbc.org/) comes with a command line tool to interact with DBMS via ODBC DSN. You can run it using the Server parameter shown above:
+[unixODBC](http://www.unixodbc.org/) comes along with a command line tool to interact with DBMS via ODBC DSN. You can run it using the DNS and Server parameter shown above:
 
 ```
 isql DSN_MSSQL sa 'yourStrong(!)Password'
