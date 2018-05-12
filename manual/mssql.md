@@ -76,7 +76,22 @@ docker create -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQ
 ```
 
 ### Using the Test Server Container
-The Container created is named **test-db-mssql**. You can start the server by run `docker start test-db-mssql`, shutdown the server by run `docker stop test-db-mssql` and destroy the server container by run `docker rm test-db-mssql`.
+The Container was created and named **test-db-mssql**. 
+
+#### Start the server
+```
+docker start test-db-mssql
+```
+
+#### Shutdown the server
+```
+docker stop test-db-mssql
+```
+
+#### Destroy the server container
+```
+docker rm test-db-mssql
+```
 
 ### Verify ODBC installation using running Server Container
 [unixODBC](http://www.unixodbc.org/) comes with a command line tool to interact with DBMS via ODBC DSN. You can run it using the Server parameter shown above:
