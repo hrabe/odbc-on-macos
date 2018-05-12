@@ -2,7 +2,7 @@
 [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) is a relational database management system developed by Microsoft.
 
 ## Install ODBC driver 
-MSSQL Server (and also Sybase) can be accessed using the FreeTDS driver available at [Homebrew](https://brew.sh/):
+MSSQL Server (and also Sybase) can be accessed using the [FreeTDS](http://www.freetds.org/) driver available at [Homebrew](https://brew.sh/):
 ```
 brew install freetds --with-unixodbc
 ```
