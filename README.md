@@ -126,9 +126,9 @@ Servername             = MSSQLServer
 ```
 
 ### Use MSSQL Server via Docker Image
-Microsoft provides [official images for Microsoft SQL Server on Linux for Docker Engine](https://hub.docker.com/r/microsoft/mssql-server-linux/). For detailed desciption about given environment vars please read the docker image description.
+Microsoft provides [official images for Microsoft SQL Server on Linux for Docker Engine](https://hub.docker.com/r/microsoft/mssql-server-linux/). For detailed description about possible environment variables please read this docker image description.
 
-#### Server Parameter for ODBC connects
+#### Server connect parameter
 ```
 Host    : localhost
 Port    : 1433
