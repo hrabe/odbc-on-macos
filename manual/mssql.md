@@ -72,25 +72,25 @@ docker pull microsoft/mssql-server-linux:latest
 
 ### Create a Test Server Container
 ```
-docker create -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQL_PID=Developer' -e 'no_proxy=*.local, 169.254/16' -p 1433:1433 --name test-db-mssql -d microsoft/mssql-server-linux:latest
+docker create -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQL_PID=Developer' -e 'no_proxy=*.local, 169.254/16' -p 1433:1433 --name test-server-mssql microsoft/mssql-server-linux:latest
 ```
 
 ### Using the Test Server Container
-The Container was created and named **test-db-mssql**. 
+The Container was created and named **test-server-mssql**. 
 
 #### Start the server
 ```
-docker start test-db-mssql
+docker start test-server-mssql
 ```
 
 #### Shutdown the server
 ```
-docker stop test-db-mssql
+docker stop test-server-mssql
 ```
 
 #### Destroy the server container
 ```
-docker rm test-db-mssql
+docker rm test-server-mssql
 ```
 
 ### Verify ODBC installation using running Server Container
