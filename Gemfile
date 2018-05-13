@@ -3,6 +3,7 @@ source 'https://rubygems.org' do
   gem 'power_assert', '>=0.2.6'
   gem 'minitest'
   gem 'minitest-power_assert', '>= 0.2.0'
+  gem 'inifile'
   gem 'ruby-odbc', '~> 0.99998'
 end
 
