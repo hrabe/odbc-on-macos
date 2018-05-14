@@ -4,6 +4,12 @@ require_relative 'helper/docker'
 require_relative 'helper/odbc'
 
 namespace :mssql do
+  desc 'Setup MSSQL Server and ODBC'
+  task :setup => ['server:install', 'odbc:install']
+
+  desc 'Test MSSQL Server'
+  task :test => []
+
   namespace :server do
     SERVER_NAME = 'test-server-mssql'
     IMAGE_NAME = 'microsoft/mssql-server-linux:latest'
