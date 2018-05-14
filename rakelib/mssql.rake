@@ -7,16 +7,16 @@ namespace :mssql do
     SERVER_NAME = 'test-server-mssql'
     IMAGE_NAME = 'microsoft/mssql-server-linux:latest'
 
-    desc 'Installs MSSQL Server'
+    desc 'Install MSSQL Server'
     task :install => ['image:pull', 'container:create']
 
-    desc 'Uninstalls MSSQL Server'
+    desc 'Uninstall MSSQL Server'
     task :uninstall => ['container:rm', 'image:rmi']
 
-    desc 'Starts MSSQL Server'
+    desc 'Start MSSQL Server'
     task :start => [:install, 'container:start']
 
-    desc 'Stops MSSQL Server'
+    desc 'Stop MSSQL Server'
     task :stop => [:install, 'container:stop']
 
     namespace :image do
