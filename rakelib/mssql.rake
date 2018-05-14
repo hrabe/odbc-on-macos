@@ -56,7 +56,7 @@ namespace :mssql do
         Docker.start(SERVER_NAME)
         Docker.log_with(SERVER_NAME) do |log|
           print '.'
-          !log.match('Service Broker manager has started.').nil?
+          log.include?('Service Broker manager has started.')
         end
         puts ' accepts connections now.'
       end
