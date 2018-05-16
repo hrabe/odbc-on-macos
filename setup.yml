@@ -1,0 +1,197 @@
+---
+names:
+  mssql: MSSQL
+  oracle: Oracle
+  postgre: PostgreSQL
+  mysql: MySQL
+  firebird: Firebird
+dependencies:
+  brew: 'brew --version'
+  docker: 'docker --version'
+  unixodbc: 'isql --version'
+mssql:
+  docker:
+    image: microsoft/mssql-server-linux:latest
+    environment:
+      - ACCEPT_EULA: Y
+      - SA_PASSWORD: yourStrong(!)Password
+    ports:
+      - public: 1433
+        private: 1433
+  odbc:
+    install:
+      brew:
+        formula: freetds --with-unixodbc
+    driver:
+      Description: FreeTDS Driver for Linux & MSSQL
+      Driver: /usr/local/lib/libtdsodbc.so
+      Setup: /usr/local/lib/libtdsodbc.so
+    dsn:
+      Description: MSSQL Test Server DSN
+      Driver: FreeTDS driver
+      Servername: MSSQL
+      User: sa
+      Password: yourStrong(!)Password
+postgres:
+  docker:
+    image: postgres:10.3
+    environment:
+      - LANG: en_US.utf8
+      - POSTGRES_PASSWORD: yourStrong(!)Password
+    ports:
+      - public: 5432
+        private: 5432
+  odbc:
+    install:
+      brew:
+        formula: psqlodbc
+    driver:
+      Description: PostgreSQL driver for Linux
+      Driver: /usr/local/lib/psqlodbcw.so
+    dsn:
+      Description: PostgreSQL Test Server DSN
+      Driver: PostgreSQL driver
+      Servername: localhost
+      Port: 5432
+      User: postgre
+      Password: yourStrong(!)Password
+oracle:
+  docker:
+    image: wnameless/oracle-xe-11g:latest
+    environment:
+      - ORACLE_ALLOW_REMOTE: 'true'
+        ORACLE_ENABLE_XDB: 'true'
+    ports:
+      - public: 1521
+        private: 1521
+  odbc:
+    install:
+      source:
+        files:
+          - instantclient-basic-macos.x64-12.2.0.1.0-2.zip
+          - instantclient-odbc-macos.x64-12.2.0.1.0-2.zip
+        target: /usr/local/odbc_oracle
+        build: false
+        symlinks:
+          - /usr/local/odbc_oracle/instantclient_12_2/libclntsh.dylib.12.1
+          - /usr/local/odbc_oracle/instantclient_12_2/libclntshcore.dylib.12.1
+          - /usr/local/odbc_oracle/instantclient_12_2/libsqora.dylib.12.1           
+    driver:
+      Description: Oracle ODBC driver for Oracle 12c
+      Driver: /usr/local/lib/libsqora.dylib.12.1
+      Setup:
+      FileUsage:
+      CPTimeout:
+      CPReuse:
+    dsn:
+      Description: Oracle Test Server DSN
+      Driver: Oracle driver
+      ServerName: localhost:1521/XE
+      User: system
+      Password: oracle
+      Application Attributes: T
+      Attributes: W
+      BatchAutocommitMode: IfAllSuccessful
+      BindAsFLOAT: F
+      CloseCursor: F
+      DisableDPM: F
+      DisableMTS: T
+      EXECSchemaOpt:
+      EXECSyntax: T
+      Failover: T
+      FailoverDelay: 10
+      FailoverRetryCount: 10
+      FetchBufferSize: 64000
+      ForceWCHAR: F
+      Lobs: T
+      Longs: T
+      MaxLargeData: 0
+      MetadataIdDefault: F
+      QueryTimeout: T
+      ResultSets: T
+      SQLGetData extensions: F
+      Translation DLL:
+      Translation Option: 0
+      DisableRULEHint: T
+      UserID:
+      StatementCache: F
+      CacheBufferSize: 20
+      UseOCIDescribeAny: F
+      SQLTranslateErrors: F
+      MaxTokenSize: 8192
+      AggregateSQLType: FLOAT
+mysql:
+  docker: 
+    image: mysql/mysql-server:5.7
+    environment:
+      - MYSQL_DATABASE: test
+      - MYSQL_ROOT_PASSWORD: yourStrong(!)Password
+      - MYSQL_USER: mysql
+      - MYSQL_PASSWORD: yourStrong(!)Password
+      - MYSQL_ROOT_HOST: '%'
+    ports:
+      - public: 3306
+        private: 3306
+  odbc:
+    install:
+      brew:
+        formula: mysql
+      source:
+        files:
+          - mysql-connector-odbc-5.3.10-src.tar.gz
+        target: /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10
+        build: true
+        symlinks:
+          - /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10/_build/lib/libmyodbc5a.so
+          - /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10/_build/lib/libmyodbc5w.so  
+    driver:
+      Description: MySQL ODBC Unicode driver for linux
+      Driver: /usr/local/lib/libmyodbc5w.so
+    dsn:
+      Description: MySQL Test Server DSN
+      Driver: MySQL driver
+      Server: 127.0.0.1
+      Port: 3306
+      Database: test
+      User: root
+      Password: yourStrong(!)Password
+      OPTION: 3
+firebird:
+  docker:
+    image: ihsahn/firebird-docker
+    environment:
+      - DEBIAN_FRONTEND: noninteractive
+      - FIREBIRD_PASSWORD: sysdba_passwd
+    ports: 
+      - public: 3050
+        private: 3050          
+  odbc:
+    install:
+      app:
+        files:
+          - FirebirdCS-2.5.8-27089-1-x86_64.pkg
+      source:
+        files:
+          - OdbcJdbc-src-2.0.5.156.tar.gz
+        target: /usr/local/odbc_firebird/firebird-odbc-2.0.5.156
+        build: true
+        symlinks:
+          - /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/Builds/Gcc.darwin/Release_x86_64/libOdbcFb.dylib      
+    driver:
+      Description: Firebird ODBC driver
+      Driver: /usr/local/lib/libOdbcFb.dylib
+    dsn:
+      Description: Firebird Test Server DSN
+      Driver: Firebird driver
+      Dbname: 127.0.0.1/32779:/opt/firebird/bin/soci_test
+      User: sysdba
+      Password: sysdba_passwd
+      Role:
+      Client:
+      CharacterSet: NONE
+      ReadOnly: No
+      NoWait: No
+      Dialect: 3
+      QuotedIdentifier: Yes
+      SensitiveIdentifier: No
+      AutoQuotedIdentifier: No
