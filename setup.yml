@@ -36,8 +36,8 @@ mssql:
       Setup: /usr/local/lib/libtdsodbc.so
     dsn:
       Description: MSSQL Test Server DSN
-      Driver: FreeTDS driver
-      Servername: MSSQLServer
+      Driver: Driver_MSSQL
+      Servername: Server_MSSQL
       User: sa
       Password: yourStrong(!)Password
 postgre:
@@ -58,7 +58,7 @@ postgre:
       Driver: /usr/local/lib/psqlodbcw.so
     dsn:
       Description: PostgreSQL Test Server DSN
-      Driver: PostgreSQL driver
+      Driver: Driver_PostgreSQL
       Servername: localhost
       Port: 5432
       User: postgre
@@ -93,7 +93,7 @@ oracle:
       CPReuse:
     dsn:
       Description: Oracle Test Server DSN
-      Driver: Oracle driver
+      Driver: Driver_Oracle
       ServerName: localhost:1521/XE
       User: system
       Password: oracle
@@ -157,7 +157,7 @@ mysql:
       Driver: /usr/local/lib/libmyodbc5w.so
     dsn:
       Description: MySQL Test Server DSN
-      Driver: MySQL driver
+      Driver: Driver_MySQL
       Server: 127.0.0.1
       Port: 3306
       Database: test
@@ -190,7 +190,7 @@ firebird:
       Driver: /usr/local/lib/libOdbcFb.dylib
     dsn:
       Description: Firebird Test Server DSN
-      Driver: Firebird driver
+      Driver: Driver_Firebird
       Dbname: 127.0.0.1/3050:/opt/firebird/bin/soci_test
       User: sysdba
       Password: sysdba_passwd

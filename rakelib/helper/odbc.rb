@@ -17,7 +17,7 @@ module ODBC
   def self.install_driver(server, name, filename)
     IO.write(
       filename,
-      ODBC.file_content("#{name} Driver", SETUP::WORKBOOK[server][:odbc][:driver])
+      ODBC.file_content("Driver_#{name}", SETUP::WORKBOOK[server][:odbc][:driver])
     )
     system "odbcinst -i -d -f #{ROOT_DIR}/#{filename}"
   end
@@ -25,7 +25,7 @@ module ODBC
   def self.install_dsn(server, name, filename)
     IO.write(
       filename,
-      ODBC.file_content("#{name} DSN", SETUP::WORKBOOK[server][:odbc][:dsn])
+      ODBC.file_content("DSN_#{name}", SETUP::WORKBOOK[server][:odbc][:dsn])
     )
     system "odbcinst -i -s -h -f #{ROOT_DIR}/#{filename}"
   end
@@ -41,11 +41,11 @@ module ODBC
   end
 
   def self.uninstall_driver(name)
-    system "odbcinst -u -d -n '#{name} Driver'"
+    system "odbcinst -u -d -n 'Driver_#{name}'"
   end
 
   def self.uninstall_dsn(name)
-    system "odbcinst -u -s -h -n '#{name} DSN'"
+    system "odbcinst -u -s -h -n 'DSN_#{name}'"
   end
 
   def self.uninstall_freetds(name)

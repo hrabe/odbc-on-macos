@@ -29,7 +29,7 @@ Compile-time settings (established with the "configure" script)
 
 Now edit `/usr/local/etc/freetds.conf` and append:
 ```
-[MSSQLServer]
+[Server_MSSQL]
 host = localhost
 port = 1433
 tds version = 7.3
@@ -38,7 +38,7 @@ tds version = 7.3
 ## Edit ODBC Driver Manager file
 Edit the located [odbcinst.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) (eg. `/usr/local/etc/odbcinst.ini`) and append:
 ```
-[FreeTDS Driver]
+[Driver_MSSQL]
 Description     = FreeTDS Driver for Linux & MSSQL
 Driver          = /usr/local/lib/libtdsodbc.so
 Setup           = /usr/local/lib/libtdsodbc.so
@@ -50,8 +50,8 @@ You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#
 ```
 [DSN_MSSQL]
 Description            = Test Server MSSQL
-Driver                 = FreeTDS Driver
-Servername             = MSSQLServer
+Driver                 = Driver_MSSQL
+Servername             = Server_MSSQL
 ```
 
 ## Use MSSQL Server via Docker Image
@@ -67,12 +67,12 @@ Password: yourStrong(!)Password
 
 ### Download Image
 ```
-docker pull microsoft/mssql-server-linux:latest
+docker pull microsoft/mssql-server-linux:2017-latest
 ```
 
 ### Create a Test Server Container
 ```
-docker create -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQL_PID=Developer' -e 'no_proxy=*.local, 169.254/16' -p 1433:1433 --name test-server-mssql microsoft/mssql-server-linux:latest
+docker create -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQL_PID=Developer' -e 'no_proxy=*.local, 169.254/16' -p 1433:1433 --name test-server-mssql microsoft/mssql-server-linux:2017-latest
 ```
 
 ### Using the Test Server Container
