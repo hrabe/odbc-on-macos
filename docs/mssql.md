@@ -27,7 +27,7 @@ Compile-time settings (established with the "configure" script)
                                MARS: no
 ```
 
-Now edit `/usr/local/etc/freetds.conf` and append:
+Now edit `/usr/local/etc/freetds.conf` or the user specific `~/.freetds.conf` and append:
 ```
 [Server_MSSQL]
 host = localhost
