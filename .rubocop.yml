@@ -1,0 +1,12 @@
+AllCops:
+  TargetRubyVersion: 2.5.1
+
+Style/HashSyntax:
+  EnforcedStyle: no_mixed_keys
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*.rake"
+
+Metrics/LineLength:
+   Max: 120
