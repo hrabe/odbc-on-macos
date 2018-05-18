@@ -1,56 +1,56 @@
 # frozen_string_literal: true
 
-require 'inifile'
-
-# ODBC managment helper
+# helper for odbc ini files
 module ODBC
-  # odbcinst command line tool for drivers
-  module Driver
-    def self.add(filename)
-      system "odbcinst -i -d -f #{template(filename)}"
-    end
-
-    def self.remove(name)
-      system "odbcinst -u -d -n '#{name}'"
-    end
-
-    def self.template(filename)
-      File.expand_path("#{__dir__}/../../templates/driver/#{filename}")
-    end
+  def self.swap_files(file_a, file_b)
+    system "touch #{file_a}"
+    system "touch #{file_b}"
+    system "mv #{file_a} #{file_a}.tmp"
+    system "mv #{file_b} #{file_a}"
+    system "mv #{file_a}.tmp #{file_b}"
   end
 
-  # odbcinst command line tool for data sources
-  module Datasource
-    def self.add(filename)
-      system "odbcinst -i -s -h -f #{template(filename)}"
-    end
-
-    def self.remove(name)
-      system "odbcinst  -u -s -h -n '#{name}'"
-    end
-
-    def self.template(filename)
-      File.expand_path("#{__dir__}/../../templates/datasource/#{filename}")
-    end
+  def self.file_content(section, mapping)
+    (["[#{section}]"] + mapping.map { |k, v| "#{k}= #{v}" }).join("\n")
   end
 
-  # freetds.conf modification (like odbcinst tool)
-  module FreeTDS
-    def self.add(filename)
-      conf = IniFile.load(conf_file)
-      template = IniFile.load(ODBC::Driver.template(filename))
-      conf.merge!(template)
-      conf.save
-    end
+  def self.install_driver(server, name, filename)
+    IO.write(
+      filename,
+      ODBC.file_content("#{name} Driver", SETUP::WORKBOOK[server][:odbc][:driver])
+    )
+    system "odbcinst -i -d -f #{ROOT_DIR}/#{filename}"
+  end
 
-    def self.remove(name)
-      conf = IniFile.load(conf_file)
-      conf.delete_section(name)
-      conf.save
-    end
+  def self.install_dsn(server, name, filename)
+    IO.write(
+      filename,
+      ODBC.file_content("#{name} DSN", SETUP::WORKBOOK[server][:odbc][:dsn])
+    )
+    system "odbcinst -i -s -h -f #{ROOT_DIR}/#{filename}"
+  end
 
-    def self.conf_file
-      "#{`tsql -C`.match(/freetds.conf directory: (.*)/)[1]}/freetds.conf"
-    end
+  def self.install_freetds(server, name, filename)
+    swap_files('~/.freetds.conf', '~/.odbc.ini')
+    IO.write(
+      filename,
+      ODBC.file_content(name, SETUP::WORKBOOK[server][:odbc][:freetds])
+    )
+    system "odbcinst -i -s -h -f #{ROOT_DIR}/#{filename}"
+    swap_files('~/.freetds.conf', '~/.odbc.ini')
+  end
+
+  def self.uninstall_driver(name)
+    system "odbcinst -u -d -n '#{name} Driver'"
+  end
+
+  def self.uninstall_dsn(name)
+    system "odbcinst -u -s -h -n '#{name} DSN'"
+  end
+
+  def self.uninstall_freetds(name)
+    swap_files('~/.freetds.conf', '~/.odbc.ini')
+    system "odbcinst -u -s -h -n '#{name}'"
+    swap_files('~/.freetds.conf', '~/.odbc.ini')
   end
 end

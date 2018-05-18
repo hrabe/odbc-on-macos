@@ -1,47 +1,28 @@
 # frozen_string_literal: true
 
-# Interface for docker command line tool
-module Docker
-  def self.pull(image)
+# helper for docker commands
+module DOCKER
+  def self.to_vars_string(hash)
+    hash.map { |h| "-e '#{h.to_a.join('=')}'" }.join(' ')
+  end
+
+  def self.to_ports_string(hash)
+    hash.map { |h| "-p #{h.values.join(':')}" }.join(' ')
+  end
+
+  def self.install(server)
+    vars = to_vars_string(SETUP::WORKBOOK[server][:docker][:environment])
+    ports = to_ports_string(SETUP::WORKBOOK[server][:docker][:ports])
+    image = SETUP::WORKBOOK[server][:docker][:image]
     system "docker pull #{image}"
+    system "docker create #{vars} #{ports} --name test-server-#{server} #{image}"
   end
 
-  def self.rmi(image)
-    system "docker rmi $(docker images -q #{image})"
-  end
-
-  def self.create(name, env, ports, image)
-    conf = env.map { |k, v| "-e '#{k}=#{v}'" }.join(' ')
-    mapping = ports.map { |k, v| "-p #{k.to_s.to_i}:#{v.to_i}" }.join(' ')
-    system "docker create #{conf} #{mapping} --name #{name} #{image}"
-  end
-
-  def self.rm(name)
+  def self.uninstall(server)
+    name = "test-server-#{server}"
+    image = SETUP::WORKBOOK[server][:docker][:image]
+    image_id = `docker images -q #{image}`
     system "docker rm #{name}"
-  end
-
-  def self.start(name)
-    system "docker start #{name}"
-  end
-
-  def self.stop(name)
-    system "docker stop #{name}"
-  end
-
-  def self.log(name)
-    `docker logs #{name}`
-  end
-
-  def self.log_with(name)
-    return log(name) unless block_given?
-    until yield(log(name)); end
-  end
-
-  def self.exists?(name)
-    `docker container ls -a -q -f name=#{name}`.nil?
-  end
-
-  def self.running?(name)
-    `docker container ls -q -f name=#{name}`.nil?
+    system "docker rmi #{image_id}" unless image_id.empty?
   end
 end
