@@ -4,7 +4,7 @@
 ## Install ODBC driver 
 MSSQL Server (and also Sybase) can be accessed using the [FreeTDS](http://www.freetds.org/) driver available at [Homebrew](https://brew.sh/):
 ```
-brew install freetds --with-unixodbc
+brew install freetds --with-unixodbc --with-odbc-wide --with-msdblib
 ```
 
 ## Edit FreeTDS configuration file
