@@ -7,3 +7,6 @@ Style/HashSyntax:
 Metrics/BlockLength:
   Exclude:
     - "**/*.rake"
+
+Metrics/LineLength:
+   Max: 120
