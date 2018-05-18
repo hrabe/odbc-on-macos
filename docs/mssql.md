@@ -8,7 +8,7 @@ brew install freetds --with-unixodbc --with-odbc-wide --with-msdblib
 ```
 
 ## Edit FreeTDS configuration file
-Check the location of **freetds.conf** by run `tsql -C`. Should get as example:
+Check the location of [**freetds.conf**](http://www.freetds.org/userguide/freetdsconf.htm) by run `tsql -C`. Should get as example:
 ```
 Compile-time settings (established with the "configure" script)
                             Version: freetds v1.00.91
