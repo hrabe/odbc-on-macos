@@ -11,17 +11,25 @@ dependencies:
   unixodbc: 'isql --version'
 mssql:
   docker:
-    image: microsoft/mssql-server-linux:latest
+    image: microsoft/mssql-server-linux:2017-latest
     environment:
       - ACCEPT_EULA: Y
       - SA_PASSWORD: yourStrong(!)Password
+      - MSSQL_PID: 'Developer'
     ports:
       - public: 1433
         private: 1433
   odbc:
     install:
       brew:
-        formula: freetds --with-unixodbc
+        formula: freetds
+        options:
+          - '--with-unixodbc'
+          - '--with-odbc-wide' 
+          - '--with-msdblib'
+    freetds:
+      host: localhost
+      port: 1433
     driver:
       Description: FreeTDS Driver for Linux & MSSQL
       Driver: /usr/local/lib/libtdsodbc.so
@@ -29,10 +37,10 @@ mssql:
     dsn:
       Description: MSSQL Test Server DSN
       Driver: FreeTDS driver
-      Servername: MSSQL
+      Servername: MSSQLServer
       User: sa
       Password: yourStrong(!)Password
-postgres:
+postgre:
   docker:
     image: postgres:10.3
     environment:
@@ -57,7 +65,7 @@ postgres:
       Password: yourStrong(!)Password
 oracle:
   docker:
-    image: wnameless/oracle-xe-11g:latest
+    image: wnameless/oracle-xe-11g:18.04
     environment:
       - ORACLE_ALLOW_REMOTE: 'true'
         ORACLE_ENABLE_XDB: 'true'
@@ -75,7 +83,7 @@ oracle:
         symlinks:
           - /usr/local/odbc_oracle/instantclient_12_2/libclntsh.dylib.12.1
           - /usr/local/odbc_oracle/instantclient_12_2/libclntshcore.dylib.12.1
-          - /usr/local/odbc_oracle/instantclient_12_2/libsqora.dylib.12.1           
+          - /usr/local/odbc_oracle/instantclient_12_2/libsqora.dylib.12.1
     driver:
       Description: Oracle ODBC driver for Oracle 12c
       Driver: /usr/local/lib/libsqora.dylib.12.1
@@ -143,7 +151,7 @@ mysql:
         build: true
         symlinks:
           - /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10/_build/lib/libmyodbc5a.so
-          - /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10/_build/lib/libmyodbc5w.so  
+          - /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10/_build/lib/libmyodbc5w.so
     driver:
       Description: MySQL ODBC Unicode driver for linux
       Driver: /usr/local/lib/libmyodbc5w.so
@@ -158,13 +166,13 @@ mysql:
       OPTION: 3
 firebird:
   docker:
-    image: ihsahn/firebird-docker
+    image: ihsahn/firebird-docker:2.5
     environment:
       - DEBIAN_FRONTEND: noninteractive
       - FIREBIRD_PASSWORD: sysdba_passwd
     ports: 
       - public: 3050
-        private: 3050          
+        private: 3050
   odbc:
     install:
       app:
@@ -176,14 +184,14 @@ firebird:
         target: /usr/local/odbc_firebird/firebird-odbc-2.0.5.156
         build: true
         symlinks:
-          - /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/Builds/Gcc.darwin/Release_x86_64/libOdbcFb.dylib      
+          - /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/Builds/Gcc.darwin/Release_x86_64/libOdbcFb.dylib
     driver:
       Description: Firebird ODBC driver
       Driver: /usr/local/lib/libOdbcFb.dylib
     dsn:
       Description: Firebird Test Server DSN
       Driver: Firebird driver
-      Dbname: 127.0.0.1/32779:/opt/firebird/bin/soci_test
+      Dbname: 127.0.0.1/3050:/opt/firebird/bin/soci_test
       User: sysdba
       Password: sysdba_passwd
       Role:
