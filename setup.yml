@@ -1,8 +1,8 @@
 ---
 names:
   mssql: MSSQL
+  postgres: PostgreSQL
   oracle: Oracle
-  postgre: PostgreSQL
   mysql: MySQL
   firebird: Firebird
 dependencies:
@@ -40,7 +40,7 @@ mssql:
       Servername: Server_MSSQL
       User: sa
       Password: yourStrong(!)Password
-postgre:
+postgres:
   docker:
     image: postgres:10.3
     environment:
