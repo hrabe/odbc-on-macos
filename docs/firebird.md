@@ -1,8 +1,10 @@
 # Firebird Server
+[Firebird](https://firebirdsql.org) is an open source SQL relational database management system that "runs on Linux, Microsoft Windows, and several Unix platforms". The database forked from Borland's open source edition of [InterBase](https://www.embarcadero.com/products/interbase) in 2000, but since Firebird 1.5 the code has been largely rewritten.
 
 ## Install ODBC driver
 Unfortunately the driver must be compiled from C/C++ sources. This requires the Header and Lib files from Firebird Server.
-Dowload from [Firebird 2.5.8](https://www.firebirdsql.org/en/firebird-2-5-8/) the package file [Mac OS X 64-bit Classic, Superclassic & Embedded (Intel)](https://github.com/FirebirdSQL/firebird/releases/download/R2_5_8/FirebirdCS-2.5.8-27089-1-x86_64.pkg) and install it.
+Download now from [Firebird 2.5.8 page](https://www.firebirdsql.org/en/firebird-2-5-8/) the package file [Mac OS X 64-bit Classic, Superclassic & Embedded (Intel)](https://github.com/FirebirdSQL/firebird/releases/download/R2_5_8/FirebirdCS-2.5.8-27089-1-x86_64.pkg) and install it.
+
 Unfortunately the Firebird server will be running after installation as daemon already and should be shutdown/unloaded by:
 ```
 sudo launchctl unload -w /Library/LaunchDaemons/org.firebird.gds.plist
@@ -13,7 +15,7 @@ tar xvzf OdbcJdbc-src-2.0.5.156.tar.gz -C /usr/local/odbc_firebird/firebird-odbc
 cd /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/Builds/Gcc.darwin
 ```
 
-You have to edit the file **makefile.darwin** file and do following changes:
+You have to edit the file **makefile.darwin** and do following changes:
 - replace `ODBCMANAGER=iODBC` by `ODBCMANAGER=ODBC`
 - delete 3 occurances of: `--def $(ODBCJDBCDEFFILE)`
 ```
