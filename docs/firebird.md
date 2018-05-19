@@ -1,7 +1,60 @@
 # Firebird Server
 
-- tbd.
+## Install ODBC driver
+Unfortunately the driver must be compiled from C/C++ sources. This requires the Header and Lib files from Firebird Server.
+Dowload from [Firebird 2.5.8](https://www.firebirdsql.org/en/firebird-2-5-8/) the package file [Mac OS X 64-bit Classic, Superclassic & Embedded (Intel)](https://github.com/FirebirdSQL/firebird/releases/download/R2_5_8/FirebirdCS-2.5.8-27089-1-x86_64.pkg) and install it.
+Unfortunately the Firebird server will be running after installation as daemon already and should be shutdown/unloaded by:
+```
+sudo launchctl unload -w /Library/LaunchDaemons/org.firebird.gds.plist
+```
+Download now from [Firebird ODBC Drivers](https://github.com/FirebirdSQL/firebird-odbc-driver) the sources of [OdbcJdbc-src-2.0.5.156.tar.gz](https://sourceforge.net/projects/firebird/files/firebird-ODBC-driver/2.0.5-Release/OdbcJdbc-src-2.0.5.156.tar.gz/download)
+```
+tar xvzf OdbcJdbc-src-2.0.5.156.tar.gz -C /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/
+cd /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/Builds/Gcc.darwin
+```
 
+You have to edit the file **makefile.darwin** file and do following changes:
+- replace `ODBCMANAGER=iODBC` by `ODBCMANAGER=ODBC`
+- delete 3 occurances of: `--def $(ODBCJDBCDEFFILE)`
+```
+make -B -f makefile.darwin all
+```
+The Firebird ODBC libraries need to be in the macOS library search path:
+
+```
+cd /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/Builds/Gcc.darwin/Release_x86_64
+ln -s $(pwd)/libOdbcFb.dylib /usr/local/lib
+```
+
+## Edit ODBC Driver Manager file
+Edit the located [odbcinst.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) (eg. `/usr/local/etc/odbcinst.ini`) and append:
+```
+[Driver_Firebird]
+Description= Firebird ODBC driver
+Driver= /usr/local/lib/libOdbcFb.dylib
+```
+
+## Edit ODBC Data Source file
+You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) or user [.odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) file. As example edit your user file `~/.odbc.ini` and append:
+```
+[[DSN_Firebird]
+Description= Firebird Test Server DSN
+Driver= Driver_Firebird
+Dbname= 127.0.0.1/3050:/opt/firebird/bin/test
+User= sysdba
+Password= sysdba_passwd
+Role= 
+Client= 
+CharacterSet= NONE
+ReadOnly= false
+NoWait= false
+Dialect= 3
+QuotedIdentifier= true
+SensitiveIdentifier= false
+AutoQuotedIdentifier= false
+```
+
+**TODO**: Describe Database creation.
 
 ## Use Firebird Server via Docker Image
 Unfortunately [Firebird Foundation](https://firebirdsql.org) doesn't support (proper working) docker images. I used the image [Firebird Sql Server 2.0 & 2.5 (Super Server)](https://hub.docker.com/r/ihsahn/firebird-docker/). For detailed description about possible environment variables please read this docker image description.
