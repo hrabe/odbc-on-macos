@@ -5,7 +5,7 @@
 Unfortunately the driver must be compiled from C/C++ sources. This requires the Header and Lib files from Firebird Server.
 Download now from [Firebird 2.5.8 page](https://www.firebirdsql.org/en/firebird-2-5-8/) the package file [Mac OS X 64-bit Classic, Superclassic & Embedded (Intel)](https://github.com/FirebirdSQL/firebird/releases/download/R2_5_8/FirebirdCS-2.5.8-27089-1-x86_64.pkg) and install it.
 
-Unfortunately the Firebird server will be running after installation as daemon already and should be shutdown/unloaded by:
+Unfortunately the Firebird server will be running as daemon already after installation and should be shutdown/unloaded by:
 ```
 sudo launchctl unload -w /Library/LaunchDaemons/org.firebird.gds.plist
 ```
