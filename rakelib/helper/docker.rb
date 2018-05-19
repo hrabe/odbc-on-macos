@@ -24,7 +24,7 @@ module DOCKER
     image_id = `docker images -q #{image}`
     stop(server)
     system "docker rm #{name}" if container_exists?(server)
-    system "docker rmi #{image_id}" unless image_id.empty?
+    system "docker rmi #{image_id}" unless image_id.empty? || num_descendant_of(image).positive?
   end
 
   def self.start(server)
