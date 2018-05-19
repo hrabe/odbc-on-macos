@@ -61,6 +61,9 @@ namespace :stop do
       DOCKER.stop(server)
     end
   end
+
+  desc 'Stop all Server'
+  task :all => SETUP::WORKBOOK[:names].keys
 end
 
 namespace :uninstall do
