@@ -68,7 +68,7 @@ oracle:
     image: wnameless/oracle-xe-11g:18.04
     environment:
       - ORACLE_ALLOW_REMOTE: 'true'
-        ORACLE_ENABLE_XDB: 'true'
+      - ORACLE_ENABLE_XDB: 'true'
     ports:
       - public: 1521
         private: 1521
