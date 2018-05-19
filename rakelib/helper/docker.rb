@@ -22,6 +22,7 @@ module DOCKER
     name = "test-server-#{server}"
     image = SETUP::WORKBOOK[server][:docker][:image]
     image_id = `docker images -q #{image}`
+    stop(server)
     system "docker rm #{name}" if container_exists?(server)
     system "docker rmi #{image_id}" unless image_id.empty?
   end
