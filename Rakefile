@@ -45,19 +45,25 @@ end
 namespace :start do
   SETUP::WORKBOOK[:names].each_pair do |server, name|
     desc "Start #{name} Server"
-    task server do # TODO deps to existing container
+    task server do # TODO: deps to existing container
       DOCKER.start(server)
     end
   end
+
+  desc 'Start all Server'
+  task :all => SETUP::WORKBOOK[:names].keys
 end
 
 namespace :stop do
   SETUP::WORKBOOK[:names].each_pair do |server, name|
     desc "Stop #{name} Server"
-    task server do # TODO deps to existing container
+    task server do # TODO: deps to existing container
       DOCKER.stop(server)
     end
   end
+
+  desc 'Stop all Server'
+  task :all => SETUP::WORKBOOK[:names].keys
 end
 
 namespace :uninstall do

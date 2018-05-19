@@ -15,22 +15,37 @@ module DOCKER
     ports = to_ports_string(SETUP::WORKBOOK[server][:docker][:ports])
     image = SETUP::WORKBOOK[server][:docker][:image]
     system "docker pull #{image}"
-    system "docker create #{vars} #{ports} --name test-server-#{server} #{image}"
+    system "docker create #{vars} #{ports} --name test-server-#{server} #{image}" unless container_exists?(server)
   end
 
   def self.uninstall(server)
     name = "test-server-#{server}"
     image = SETUP::WORKBOOK[server][:docker][:image]
     image_id = `docker images -q #{image}`
-    system "docker rm #{name}"
-    system "docker rmi #{image_id}" unless image_id.empty?
+    stop(server)
+    system "docker rm #{name}" if container_exists?(server)
+    system "docker rmi #{image_id}" unless image_id.empty? || num_descendant_of(image).positive?
   end
 
   def self.start(server)
-    system "docker start test-server-#{server}"
+    return unless container_exists?(server)
+    system "docker start test-server-#{server}" unless container_running?(server)
   end
 
   def self.stop(server)
-    system "docker stop test-server-#{server}"
+    return unless container_exists?(server)
+    system "docker stop test-server-#{server}" if container_running?(server)
+  end
+
+  def self.container_exists?(server)
+    `docker container ls -a -q -f name=test-server-#{server}`.size.positive?
+  end
+
+  def self.container_running?(server)
+    `docker container ls -q -f name=test-server-#{server}`.size.positive?
+  end
+
+  def self.num_descendant_of(image)
+    `docker ps -a -q --filter ancestor=#{image}`.split("\n").size
   end
 end
