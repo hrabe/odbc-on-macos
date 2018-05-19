@@ -12,7 +12,6 @@ module DOCKER
 
   def self.install(server)
     image = pull(server)
-    system "docker pull #{image}"
     return if container_exists?(server)
     vars = to_vars_string(server)
     ports = to_ports_string(server)
