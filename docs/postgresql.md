@@ -28,7 +28,7 @@ User= postgre
 Password= yourStrong(!)Password
 ```
 
-## Use MSSQL Server via Docker Image
+## Use PostgreSQL Server via Docker Image
 [PostgreSql.org](https://www.postgresql.org) provides [official images for Docker Engine](https://store.docker.com/images/postgres). For detailed description about possible environment variables please read this docker image description.
 
 ### Server connect parameter
@@ -46,25 +46,25 @@ docker pull postgres:10.3
 
 ### Create a Test Server Container
 ```
-docker create -e 'LANG=en_US.utf8' -e 'POSTGRES_PASSWORD=yourStrong(!)Password' -e 'no_proxy=*.local, 169.254/16' -p 5432:5432 --name test-server-postgre postgres:10.3
+docker create -e 'LANG=en_US.utf8' -e 'POSTGRES_PASSWORD=yourStrong(!)Password' -e 'no_proxy=*.local, 169.254/16' -p 5432:5432 --name test-server-postgres postgres:10.3
 ```
 
 ### Using the Test Server Container
-The Container was created and named **test-server-postgre**. 
+The Container was created and named **test-server-postgres**. 
 
 #### Start the server
 ```
-docker start test-server-postgre
+docker start test-server-postgres
 ```
 
 #### Shutdown the server
 ```
-docker stop test-server-postgre
+docker stop test-server-postgres
 ```
 
 #### Destroy the server container
 ```
-docker rm test-server-postgre
+docker rm test-server-postgres
 ```
 
 ### Verify ODBC installation using running Server Container
