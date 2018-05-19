@@ -57,7 +57,7 @@ OPTION= 3
 ```
 
 ## Use MySQL Server via Docker Image
-[postgresql.org](https://www.postgresql.org) provides [official images for Docker Engine](https://store.docker.com/images/postgres). For detailed description about possible environment variables please read this docker image description.
+Optimized [MySQL Server Docker images](https://hub.docker.com/r/mysql/mysql-server/). Created, maintained and supported by the MySQL team at [Oracle Corporation](https://www.oracle.com/index.html). For detailed description about possible environment variables please read this docker image description.
 
 ### Server connect parameter
 ```
