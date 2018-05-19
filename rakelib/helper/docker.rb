@@ -15,9 +15,7 @@ module DOCKER
     ports = to_ports_string(SETUP::WORKBOOK[server][:docker][:ports])
     image = SETUP::WORKBOOK[server][:docker][:image]
     system "docker pull #{image}"
-    unless container_exists?(server)
-      system "docker create #{vars} #{ports} --name test-server-#{server} #{image}"
-    end
+    system "docker create #{vars} #{ports} --name test-server-#{server} #{image}" unless container_exists?(server)
   end
 
   def self.uninstall(server)
