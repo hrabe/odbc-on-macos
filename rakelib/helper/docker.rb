@@ -25,4 +25,12 @@ module DOCKER
     system "docker rm #{name}"
     system "docker rmi #{image_id}" unless image_id.empty?
   end
+  
+  def self.start(server)
+    system "docker start test-server-#{server}"
+  end
+  
+  def self.stop(server)
+    system "docker stop test-server-#{server}"
+  end
 end
