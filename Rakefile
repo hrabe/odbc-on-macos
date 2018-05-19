@@ -49,6 +49,9 @@ namespace :start do
       DOCKER.start(server)
     end
   end
+
+  desc 'Start all Server'
+  task :all => SETUP::WORKBOOK[:names].keys
 end
 
 namespace :stop do
