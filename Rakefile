@@ -42,6 +42,24 @@ namespace :install do
   task :all => SETUP::WORKBOOK[:names].keys
 end
 
+namespace :start do
+  SETUP::WORKBOOK[:names].each_pair do |server, name|
+    desc "Start #{name} Server"
+    task server do # TODO deps to existing container
+      DOCKER.start(server)
+    end
+  end
+end
+
+namespace :stop do
+  SETUP::WORKBOOK[:names].each_pair do |server, name|
+    desc "Stop #{name} Server"
+    task server do # TODO deps to existing container
+      DOCKER.stop(server)
+    end
+  end
+end
+
 namespace :uninstall do
   SETUP::WORKBOOK[:names].each_pair do |server, name|
     desc "Uninstall #{name} Server"
