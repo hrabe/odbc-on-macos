@@ -29,7 +29,7 @@ Password= yourStrong(!)Password
 ```
 
 ## Use PostgreSQL Server via Docker Image
-[PostgreSql.org](https://www.postgresql.org) provides [official images for Docker Engine](https://store.docker.com/images/postgres). For detailed description about possible environment variables please read this docker image description.
+[postgresql.org](https://www.postgresql.org) provides [official images for Docker Engine](https://store.docker.com/images/postgres). For detailed description about possible environment variables please read this docker image description.
 
 ### Server connect parameter
 ```
