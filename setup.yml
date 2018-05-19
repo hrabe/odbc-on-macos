@@ -61,7 +61,7 @@ postgres:
       Driver: Driver_PostgreSQL
       Servername: localhost
       Port: 5432
-      User: postgre
+      User: postgres
       Password: yourStrong(!)Password
 oracle:
   docker:

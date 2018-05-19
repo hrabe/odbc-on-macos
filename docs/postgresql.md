@@ -24,7 +24,7 @@ Description= PostgreSQL Test Server DSN
 Driver= Driver_PostgreSQL
 Servername= localhost
 Port= 5432
-User= postgre
+User= postgres
 Password= yourStrong(!)Password
 ```
 
@@ -35,7 +35,7 @@ Password= yourStrong(!)Password
 ```
 Servername: localhost
 Port: 5432
-User: postgre
+User: postgres
 Password: yourStrong(!)Password
 ```
 
@@ -71,7 +71,7 @@ docker rm test-server-postgres
 [unixODBC](http://www.unixodbc.org/) comes along with a command line tool to interact with DBMS via ODBC DSN. You can run it using the DNS and Server parameter shown above:
 
 ```
-isql DSN_PostgreSQL sa 'yourStrong(!)Password'
+isql DSN_PostgreSQL postgres 'yourStrong(!)Password'
 ```
 
 You should get on success case:
