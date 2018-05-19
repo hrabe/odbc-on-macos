@@ -1,3 +1,3 @@
 # SQLite (file based, full scope)
 
-- tbd.
+- no server required, details follow soon.
