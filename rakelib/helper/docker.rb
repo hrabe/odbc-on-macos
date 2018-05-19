@@ -27,11 +27,13 @@ module DOCKER
   end
 
   def self.start(server)
-    system "docker start test-server-#{server}"
+    return unless container_exists?(server)
+    system "docker start test-server-#{server}" unless container_running?(server)
   end
 
   def self.stop(server)
-    system "docker stop test-server-#{server}"
+    return unless container_exists?(server)
+    system "docker stop test-server-#{server}" if container_running?(server)
   end
 
   def self.container_exists?(server)
