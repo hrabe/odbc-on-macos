@@ -41,4 +41,8 @@ module DOCKER
   def self.container_running?(server)
     `docker container ls -q -f name=test-server-#{server}`.size.positive?
   end
+
+  def self.num_descendant_of(image)
+    `docker ps -a -q --filter ancestor=#{image}`.split("\n").size
+  end
 end
