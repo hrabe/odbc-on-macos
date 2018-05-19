@@ -28,7 +28,7 @@ make myodbc5a
 The MySQL ODBC libraries need to be in the macOS library search path:
 
 ```
-cd /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10
+cd /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10/_build/lib
 ln -s $(pwd)/libmyodbc5w.so /usr/local/lib
 ln -s $(pwd)/libmyodbc5a.so /usr/local/lib
 ```
