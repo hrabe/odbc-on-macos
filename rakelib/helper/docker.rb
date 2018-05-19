@@ -33,4 +33,12 @@ module DOCKER
   def self.stop(server)
     system "docker stop test-server-#{server}"
   end
+
+  def self.container_exists?(server)
+    `docker container ls -a -q -f name=test-server-#{server}`.size.positive?
+  end
+
+  def self.container_running?(server)
+    `docker container ls -q -f name=test-server-#{server}`.size.positive?
+  end
 end
