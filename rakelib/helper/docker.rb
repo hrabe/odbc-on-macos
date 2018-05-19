@@ -2,47 +2,58 @@
 
 # helper for docker commands
 module DOCKER
-  def self.to_vars_string(hash)
-    hash.map { |h| "-e '#{h.to_a.join('=')}'" }.join(' ')
+  def self.to_vars_string(server)
+    SETUP::WORKBOOK[server][:docker][:environment].map { |h| "-e '#{h.to_a.join('=')}'" }.join(' ')
   end
 
-  def self.to_ports_string(hash)
-    hash.map { |h| "-p #{h.values.join(':')}" }.join(' ')
+  def self.to_ports_string(server)
+    SETUP::WORKBOOK[server][:docker][:ports].map { |h| "-p #{h.values.join(':')}" }.join(' ')
   end
 
   def self.install(server)
-    vars = to_vars_string(SETUP::WORKBOOK[server][:docker][:environment])
-    ports = to_ports_string(SETUP::WORKBOOK[server][:docker][:ports])
-    image = SETUP::WORKBOOK[server][:docker][:image]
+    image = pull(server)
     system "docker pull #{image}"
-    system "docker create #{vars} #{ports} --name test-server-#{server} #{image}" unless container_exists?(server)
+    return if container_exists?(server)
+    vars = to_vars_string(server)
+    ports = to_ports_string(server)
+    name = container_name(server)
+    system "docker create #{vars} #{ports} --name #{name} #{image}"
   end
 
   def self.uninstall(server)
-    name = "test-server-#{server}"
     image = SETUP::WORKBOOK[server][:docker][:image]
     image_id = `docker images -q #{image}`
     stop(server)
-    system "docker rm #{name}" if container_exists?(server)
+    system "docker rm #{container_name(server)}" if container_exists?(server)
     system "docker rmi #{image_id}" unless image_id.empty? || num_descendant_of(image).positive?
+  end
+
+  def self.pull(server)
+    image = SETUP::WORKBOOK[server][:docker][:image]
+    system "docker pull #{image}"
+    image
   end
 
   def self.start(server)
     return unless container_exists?(server)
-    system "docker start test-server-#{server}" unless container_running?(server)
+    system "docker start #{container_name(server)}" unless container_running?(server)
   end
 
   def self.stop(server)
     return unless container_exists?(server)
-    system "docker stop test-server-#{server}" if container_running?(server)
+    system "docker stop #{container_name(server)}" if container_running?(server)
+  end
+
+  def self.container_name(server)
+    "test-server-#{server}"
   end
 
   def self.container_exists?(server)
-    `docker container ls -a -q -f name=test-server-#{server}`.size.positive?
+    `docker container ls -a -q -f name=#{container_name(server)}`.size.positive?
   end
 
   def self.container_running?(server)
-    `docker container ls -q -f name=test-server-#{server}`.size.positive?
+    `docker container ls -q -f name=#{container_name(server)}`.size.positive?
   end
 
   def self.num_descendant_of(image)
