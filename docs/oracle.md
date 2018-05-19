@@ -1,6 +1,6 @@
 # Oracle Server
 
-[Oracle Database](https://www.oracle.com/database/index.html) (commonly referred to as Oracle RDBMS or simply as Oracle) is a multi-model database[4] management system produced and marketed by [Oracle Corporation](https://www.oracle.com/index.html).
+[Oracle Database](https://www.oracle.com/database/index.html) (commonly referred to as Oracle RDBMS or simply as Oracle) is a multi-model database management system produced and marketed by [Oracle Corporation](https://www.oracle.com/index.html).
 
 ## Install ODBC driver 
 Download the Oracle 12.2 Instant Client Basic and ODBC packages from [Instant Client Downloads for macOS (Intel x86)](http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html).
@@ -76,7 +76,7 @@ AggregateSQLType= FLOAT
 ```
 
 ## Use Oracle Server via Docker Image
-Unfortunately Oracle doesn't support (proper working) docker images. I used the image [wnameless/oracle-xe-11g](https://hub.docker.com/r/wnameless/oracle-xe-11g/)
+Unfortunately Oracle doesn't support (proper working) docker images. I used the image [wnameless/oracle-xe-11g](https://hub.docker.com/r/wnameless/oracle-xe-11g/) For detailed description about possible environment variables please read this docker image description.
 
 ### Server connect parameter
 ```
