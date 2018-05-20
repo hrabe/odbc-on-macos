@@ -66,6 +66,22 @@ namespace :stop do
   task :all => SETUP::WORKBOOK[:names].keys
 end
 
+namespace :test do
+  SETUP::WORKBOOK[:names].each_pair do |server, name|
+    desc "Test #{name} Server connection"
+    task server do
+      user = SETUP::WORKBOOK[server][:odbc][:dsn][:User]
+      pass = SETUP::WORKBOOK[server][:odbc][:dsn][:Password]
+      print ">>> Test #{name} Server connection: "
+      res = `isql DSN_#{name} #{user} '#{pass}' -v -b < /dev/null 2>&1`
+      puts res.empty? ? 'success.' : res.split("\n").join("\n    ")
+    end
+  end
+
+  desc 'Test all Server connections'
+  task :all => SETUP::WORKBOOK[:names].keys
+end
+
 namespace :uninstall do
   SETUP::WORKBOOK[:names].each_pair do |server, name|
     desc "Uninstall #{name} Server"
