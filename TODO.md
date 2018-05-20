@@ -22,11 +22,11 @@ The install / uninstall rake tasks do not fully work for all servers right now.
 - uninstall sources
 
 ## Scope: Test
-- isql DSN_MSSQL sa 'yourStrong(!)Password'
-- isql DSN_PostgreSQL postgres 'yourStrong(!)Password'
-- isql DSN_Oracle system oracle
-- isql DSN_MySQL root 'yourStrong(!)Password'
-- isql DSN_Firebird sysdba sysdba_passwd
+- `isql DSN_MSSQL sa 'yourStrong(!)Password'`
+- `isql DSN_PostgreSQL postgres 'yourStrong(!)Password'`
+- `isql DSN_Oracle system oracle`
+- `isql DSN_MySQL root 'yourStrong(!)Password'`
+- `isql DSN_Firebird sysdba sysdba_passwd`
 - all tests by `ruby-odbc`:
   - create table
   - create index
