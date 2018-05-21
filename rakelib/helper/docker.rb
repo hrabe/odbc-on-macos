@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'timeout'
+
 # helper for docker commands
 module DOCKER
   def self.to_vars_string(server)
@@ -36,6 +38,7 @@ module DOCKER
   def self.start(server)
     return unless container_exists?(server)
     system "docker start #{container_name(server)}" unless container_running?(server)
+    wait_for_dbms(server)
   end
 
   def self.stop(server)
@@ -57,5 +60,18 @@ module DOCKER
 
   def self.num_descendant_of(image)
     `docker ps -a -q --filter ancestor=#{image}`.split("\n").size
+  end
+
+  def self.wait_for_dbms(server)
+    name = SETUP::WORKBOOK[:names][server]
+    user = SETUP::WORKBOOK[server][:odbc][:dsn][:User]
+    pass = SETUP::WORKBOOK[server][:odbc][:dsn][:Password]
+    Timeout.timeout(10) do
+      loop do
+        `isql DSN_#{name} #{user} '#{pass}' -v -b < /dev/null 2>&1`
+        break if $?.to_i.zero?
+      end
+    end
+  rescue Timeout::Error # rubocop: disable Lint/HandleExceptions
   end
 end
