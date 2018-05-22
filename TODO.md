@@ -70,6 +70,10 @@ Ruby Gems:
 - https://shekhargulati.com/2018/01/13/using-wait-for-it-with-oracle-database-docker-image/
 - https://github.com/vishnubob/wait-for-it
 - http://www.freetds.org/userguide/freetdsconf.htm
+- https://superuser.com/questions/592921/mac-osx-users-vs-dscl-command-to-list-user/621055
+- https://superuser.com/questions/36567/how-do-i-uninstall-any-apple-pkg-package-file
+- https://apple.stackexchange.com/questions/113489/unattended-installation-of-pkg-file
+- http://www.unixodbc.org/odbcinst.html
 
 ### Unsorted
 - https://puredata.info/downloads/gem/documentation/faq/getdlldependencies
@@ -80,4 +84,11 @@ Ruby Gems:
 - https://github.com/brianb/mdbtools
 - https://github.com/brianb/mdbtools/archive/0.7.1.tar.gz
 - https://github.com/mkleehammer/pyodbc/wiki/Connecting-to-SQL-Server-from-Mac-OSX
-
+- https://stackoverflow.com/questions/1601947/how-do-i-create-a-new-firebird-database-from-the-command-line
+- http://mysql.localhost.net.ar/doc/refman/5.0/fr/myodbc-mac-os-x.html
+- https://www.systutorials.com/docs/linux/man/1-isql/
+- https://blogs.oracle.com/opal/installing-the-oracle-odbc-driver-on-macos
+- https://db.rstudio.com/best-practices/drivers/
+- https://github.com/mkleehammer/pyodbc/wiki/Connecting-to-SQL-Server-from-Mac-OSX
+- https://www.microsoft.com/en-us/sql-server/developer-get-started/ruby/mac/
+- 
