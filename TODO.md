@@ -52,6 +52,7 @@ The install / uninstall rake tasks do not fully work for all servers right now.
 - https://blogs.oracle.com/opal/installing-the-oracle-odbc-driver-on-macos
 - https://dev.mysql.com/downloads/connector/odbc/
 - https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-installation-binary-osx.html
+- https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-installation-source-unix-osx.html
 - https://www.firebirdsql.org/en/firebird-2-5-8/
 - https://github.com/FirebirdSQL/firebird/releases/download/R2_5_8/FirebirdCS-2.5.8-27089-1-x86_64.pkg
 - https://github.com/FirebirdSQL/firebird-odbc-driver
