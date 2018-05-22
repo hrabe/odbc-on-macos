@@ -35,3 +35,49 @@ The install / uninstall rake tasks do not fully work for all servers right now.
   - delete
   - drop index
   - drop table
+
+
+## Scope Resource Links
+
+### Docker Images
+- https://hub.docker.com/r/library/postgres/
+- https://hub.docker.com/r/microsoft/mssql-server-linux/
+- https://hub.docker.com/r/wnameless/oracle-xe-11g/
+- https://hub.docker.com/r/mysql/mysql-server/
+- https://hub.docker.com/r/ihsahn/firebird-docker/
+
+### ODBC Driver
+- https://github.com/mkleehammer/pyodbc/wiki/Connecting-to-SQL-Server-from-Mac-OSX
+- https://db.rstudio.com/best-practices/drivers/
+- https://blogs.oracle.com/opal/installing-the-oracle-odbc-driver-on-macos
+- https://dev.mysql.com/downloads/connector/odbc/
+- https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-installation-binary-osx.html
+- https://www.firebirdsql.org/en/firebird-2-5-8/
+- https://github.com/FirebirdSQL/firebird/releases/download/R2_5_8/FirebirdCS-2.5.8-27089-1-x86_64.pkg
+- https://github.com/FirebirdSQL/firebird-odbc-driver
+- https://sourceforge.net/projects/firebird/files/firebird-ODBC-driver/2.0.5-Release/OdbcJdbc-src-2.0.5.156.tar.gz/download
+
+### Ruby Gems
+Ruby Gems:
+
+- [http://www.ch-werner.de/rubyodbc/](http://www.ch-werner.de/rubyodbc/)
+- [~~https://bitbucket.org/ged/ruby-pg/wiki/Home~~](https://bitbucket.org/ged/ruby-pg/wiki/Home)
+- [~~https://github.com/rails-sqlserver/tiny_tds~~~](https://github.com/rails-sqlserver/tiny_tds)
+- [~~https://www.rubydoc.info/github/kubo/ruby-oci8~~~](https://www.rubydoc.info/github/kubo/ruby-oci8)
+
+### Tooling
+- http://www.launchd.info/
+- https://shekhargulati.com/2018/01/13/using-wait-for-it-with-oracle-database-docker-image/
+- https://github.com/vishnubob/wait-for-it
+- http://www.freetds.org/userguide/freetdsconf.htm
+
+### Unsorted
+- https://puredata.info/downloads/gem/documentation/faq/getdlldependencies
+- https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-configuration-dsn-unix.html
+- https://www.firebirdsql.org/pdfmanual/html/qsg10-creating.html
+- https://stackoverflow.com/questions/1601947/how-do-i-create-a-new-firebird-database-from-the-command-line
+- https://github.com/Homebrew/homebrew-core/blob/e0e86e6155f0fe4f501b2003ba76fbf1fda491bb/Formula/mdbtools.rb
+- https://github.com/brianb/mdbtools
+- https://github.com/brianb/mdbtools/archive/0.7.1.tar.gz
+- https://github.com/mkleehammer/pyodbc/wiki/Connecting-to-SQL-Server-from-Mac-OSX
+
