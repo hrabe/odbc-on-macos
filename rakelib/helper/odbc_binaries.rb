@@ -18,11 +18,16 @@ module ODBC
     # helper for Application installation
     module BREW
       def self.install(server)
-        puts ">>> Brew"
+        brew = SETUP::WORKBOOK[server][:odbc][:binaries][:brew]
+        return unless brew
+        options = brew.fetch(:options, []).join(' ')
+        system "brew install #{brew[:formula]} #{options}"
       end
 
       def self.uninstall(server)
-        puts ">>> Brew"
+        brew = SETUP::WORKBOOK[server][:odbc][:binaries][:brew]
+        return unless brew
+        system "brew uninstall #{brew[:formula]}"
       end
     end
 
