@@ -15,16 +15,16 @@ task :dependencies do
 end
 
 file 'pkg/freetds.conf' => [:dependencies, 'pkg'] do |f|
-  ODBC.install_freetds(:mssql, SETUP::WORKBOOK[:mssql][:odbc][:dsn][:Servername].to_s, f.name)
+  ODBC::FREETDS.install(:mssql, SETUP::WORKBOOK[:mssql][:odbc][:dsn][:Servername].to_s, f.name)
 end
 
 SETUP::WORKBOOK[:names].each_pair do |server, name|
   file "pkg/#{server}.odbcinst.ini" => [:dependencies, 'pkg'] do |f|
-    ODBC.install_driver(server, name, f.name)
+    ODBC::DRIVER.install(server, name, f.name)
   end
 
   file "pkg/#{server}.odbc.ini" => [:dependencies, 'pkg'] do |f|
-    ODBC.install_dsn(server, name, f.name)
+    ODBC::DSN.install(server, name, f.name)
   end
 end
 
@@ -87,10 +87,10 @@ namespace :uninstall do
     desc "Uninstall #{name} Server"
     task server do
       DOCKER.uninstall(server)
-      ODBC.uninstall_driver(name)
-      ODBC.uninstall_dsn(name)
+      ODBC::DRIVER.uninstall(name)
+      ODBC::DSN.uninstall(name)
       next unless server == :mssql
-      ODBC.uninstall_freetds(SETUP::WORKBOOK[server][:odbc][:dsn][:Servername].to_s)
+      ODBC::FREETDS.uninstall(SETUP::WORKBOOK[server][:odbc][:dsn][:Servername].to_s)
     end
   end
 

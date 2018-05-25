@@ -14,43 +14,52 @@ module ODBC
     (["[#{section}]"] + mapping.map { |k, v| "#{k}= #{v}" }).join("\n")
   end
 
-  def self.install_driver(server, name, filename)
-    IO.write(
-      filename,
-      ODBC.file_content("Driver_#{name}", SETUP::WORKBOOK[server][:odbc][:driver])
-    )
-    system "odbcinst -i -d -f #{ROOT_DIR}/#{filename}"
+  # helper for driver (un)install
+  module DRIVER
+    def self.install(server, name, filename)
+      IO.write(
+        filename,
+        ODBC.file_content("Driver_#{name}", SETUP::WORKBOOK[server][:odbc][:driver])
+      )
+      system "odbcinst -i -d -f #{ROOT_DIR}/#{filename}"
+    end
+
+    def self.uninstall(name)
+      system "odbcinst -u -d -n 'Driver_#{name}'"
+    end
   end
 
-  def self.install_dsn(server, name, filename)
-    IO.write(
-      filename,
-      ODBC.file_content("DSN_#{name}", SETUP::WORKBOOK[server][:odbc][:dsn])
-    )
-    system "odbcinst -i -s -h -f #{ROOT_DIR}/#{filename}"
+  # helper for data source name (un)install
+  module DSN
+    def self.install(server, name, filename)
+      IO.write(
+        filename,
+        ODBC.file_content("DSN_#{name}", SETUP::WORKBOOK[server][:odbc][:dsn])
+      )
+      system "odbcinst -i -s -h -f #{ROOT_DIR}/#{filename}"
+    end
+
+    def self.uninstall(name)
+      system "odbcinst -u -s -h -n 'DSN_#{name}'"
+    end
   end
 
-  def self.install_freetds(server, name, filename)
-    swap_files('~/.freetds.conf', '~/.odbc.ini')
-    IO.write(
-      filename,
-      ODBC.file_content(name, SETUP::WORKBOOK[server][:odbc][:freetds])
-    )
-    system "odbcinst -i -s -h -f #{ROOT_DIR}/#{filename}"
-    swap_files('~/.freetds.conf', '~/.odbc.ini')
-  end
+  # helper for FreeTDS server (un)install
+  module FREETDS
+    def self.install(server, name, filename)
+      ODBC.swap_files('~/.freetds.conf', '~/.odbc.ini')
+      IO.write(
+        filename,
+        ODBC.file_content(name, SETUP::WORKBOOK[server][:odbc][:freetds])
+      )
+      system "odbcinst -i -s -h -f #{ROOT_DIR}/#{filename}"
+      ODBC.swap_files('~/.freetds.conf', '~/.odbc.ini')
+    end
 
-  def self.uninstall_driver(name)
-    system "odbcinst -u -d -n 'Driver_#{name}'"
-  end
-
-  def self.uninstall_dsn(name)
-    system "odbcinst -u -s -h -n 'DSN_#{name}'"
-  end
-
-  def self.uninstall_freetds(name)
-    swap_files('~/.freetds.conf', '~/.odbc.ini')
-    system "odbcinst -u -s -h -n '#{name}'"
-    swap_files('~/.freetds.conf', '~/.odbc.ini')
+    def self.uninstall(name)
+      ODBC.swap_files('~/.freetds.conf', '~/.odbc.ini')
+      system "odbcinst -u -s -h -n '#{name}'"
+      ODBC.swap_files('~/.freetds.conf', '~/.odbc.ini')
+    end
   end
 end
