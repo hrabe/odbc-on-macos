@@ -54,6 +54,7 @@ module ODBC
         # TODO: unpack (unzip or tar) to target location
         files.each { |file| uncompress(file, target) }
         # TODO: build if required
+        p source[:build] ? "YES" : "NO"
         # TODO: symlink build results or binaries
         symlinks.each do |symlink|
           p "ln -s #{symlink} /usr/local/lib"
@@ -62,8 +63,16 @@ module ODBC
 
       def self.uninstall(server)
         puts ">>> Source"
+        source = SETUP::WORKBOOK[server][:odbc][:binaries][:source]
+        return unless source
+        target = source[:target]
+        symlinks = source[:symlinks]
         # TODO: unlink build results or binaries
+        symlinks.each do |symlink|
+          p "rm /usr/local/lib/#{File.basename(symlink)}"
+        end
         # TODO: erase the traget location
+        p "rm -rf #{target}"
       end
     end
   end
