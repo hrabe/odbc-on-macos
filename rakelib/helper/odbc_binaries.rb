@@ -33,12 +33,37 @@ module ODBC
 
     # helper for Application installation
     module SOURCE
+      def self.uncompress(file, target)
+        case File.extname(file)
+        when '.gz'
+          p "tar xvzf #{file} -C #{target}"
+        when '.zip'
+          p "unzip #{file} -d #{target}"
+        else
+          raise 'unknown unkompress'
+        end
+      end
+      
       def self.install(server)
         puts ">>> Source"
+        source = SETUP::WORKBOOK[server][:odbc][:binaries][:source]
+        return unless source
+        files = source[:files].map{ |file| "#{ROOT_DIR}/binaries/source/#{file}" }
+        target = source[:target]
+        symlinks = source[:symlinks]
+        # TODO: unpack (unzip or tar) to target location
+        files.each { |file| uncompress(file, target) }
+        # TODO: build if required
+        # TODO: symlink build results or binaries
+        symlinks.each do |symlink|
+          p "ln -s #{symlink} /usr/local/lib"
+        end
       end
 
       def self.uninstall(server)
         puts ">>> Source"
+        # TODO: unlink build results or binaries
+        # TODO: erase the traget location
       end
     end
   end
