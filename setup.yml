@@ -20,7 +20,7 @@ mssql:
       - public: 1433
         private: 1433
   odbc:
-    install:
+    binaries:
       brew:
         formula: freetds
         options:
@@ -50,7 +50,7 @@ postgres:
       - public: 5432
         private: 5432
   odbc:
-    install:
+    binaries:
       brew:
         formula: psqlodbc
     driver:
@@ -73,7 +73,7 @@ oracle:
       - public: 1521
         private: 1521
   odbc:
-    install:
+    binaries:
       source:
         files:
           - instantclient-basic-macos.x64-12.2.0.1.0-2.zip
@@ -141,7 +141,7 @@ mysql:
       - public: 3306
         private: 3306
   odbc:
-    install:
+    binaries:
       brew:
         formula: mysql
       source:
@@ -174,7 +174,7 @@ firebird:
       - public: 3050
         private: 3050
   odbc:
-    install:
+    binaries:
       app:
         files:
           - FirebirdCS-2.5.8-27089-1-x86_64.pkg

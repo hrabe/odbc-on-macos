@@ -9,6 +9,7 @@ require_relative 'rakelib/helper/odbc'
 require_relative 'rakelib/helper/odbc_driver'
 require_relative 'rakelib/helper/odbc_dsn'
 require_relative 'rakelib/helper/odbc_freetds'
+require_relative 'rakelib/helper/odbc_binaries'
 
 directory 'pkg/server'
 CLOBBER << 'pkg'
@@ -23,6 +24,9 @@ end
 
 SETUP::WORKBOOK[:names].each_pair do |server, name|
   file "pkg/#{server}.odbcinst.ini" => [:dependencies, 'pkg'] do |f|
+    ODBC::BINARIES::BREW.install(server)
+    ODBC::BINARIES::APP.install(server)
+    ODBC::BINARIES::SOURCE.install(server)
     ODBC::DRIVER.install(server, name, f.name)
   end
 
@@ -92,6 +96,9 @@ namespace :uninstall do
       DOCKER.uninstall(server)
       ODBC::DRIVER.uninstall(name)
       ODBC::DSN.uninstall(name)
+      ODBC::BINARIES::BREW.uninstall(server)
+      ODBC::BINARIES::APP.uninstall(server)
+      ODBC::BINARIES::SOURCE.uninstall(server)
       next unless server == :mssql
       ODBC::FREETDS.uninstall(SETUP::WORKBOOK[server][:odbc][:dsn][:Servername].to_s)
     end
