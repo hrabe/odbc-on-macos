@@ -57,7 +57,10 @@ module ODBC
         system "rm /usr/local/lib/#{File.basename(file)}"
       end
 
-      def self.build(server)
+      def self.build(server, target)
+        shell_script = "#{ROOT_DIR}/binaries/build/#{server}.sh"
+        return unless File.executable?(shell_script)
+        system "#{shell_script} #{target}"
       end
 
       def self.install(server)
@@ -66,7 +69,7 @@ module ODBC
         source[:files].each do |file|
           uncompress("#{ROOT_DIR}/binaries/source/#{file}", source[:target])
         end
-        build(server) if source[:build]
+        build(server, source[:target])
         source[:symlinks].each { |file| symlink_lib(file) }
       end
 
