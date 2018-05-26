@@ -78,12 +78,12 @@ oracle:
         files:
           - instantclient-basic-macos.x64-12.2.0.1.0-2.zip
           - instantclient-odbc-macos.x64-12.2.0.1.0-2.zip
-        target: /usr/local/odbc_oracle
+        target: /usr/local/share/odbc_oracle
         build: false
         symlinks:
-          - /usr/local/odbc_oracle/instantclient_12_2/libclntsh.dylib.12.1
-          - /usr/local/odbc_oracle/instantclient_12_2/libclntshcore.dylib.12.1
-          - /usr/local/odbc_oracle/instantclient_12_2/libsqora.dylib.12.1
+          - /usr/local/share/odbc_oracle/instantclient_12_2/libclntsh.dylib.12.1
+          - /usr/local/share/odbc_oracle/instantclient_12_2/libclntshcore.dylib.12.1
+          - /usr/local/share/odbc_oracle/instantclient_12_2/libsqora.dylib.12.1
     driver:
       Description: Oracle ODBC driver for Oracle 12c
       Driver: /usr/local/lib/libsqora.dylib.12.1
@@ -147,11 +147,11 @@ mysql:
       source:
         files:
           - mysql-connector-odbc-5.3.10-src.tar.gz
-        target: /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10
+        target: /usr/local/share/odbc_mysql
         build: true
         symlinks:
-          - /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10/_build/lib/libmyodbc5a.so
-          - /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10/_build/lib/libmyodbc5w.so
+          - /usr/local/share/odbc_mysql/mysql-connector-odbc-5.3.10-src/_build/lib/libmyodbc5a.so
+          - /usr/local/share/odbc_mysql/mysql-connector-odbc-5.3.10-src/_build/lib/libmyodbc5w.so
     driver:
       Description: MySQL ODBC Unicode driver for linux
       Driver: /usr/local/lib/libmyodbc5w.so
@@ -181,10 +181,10 @@ firebird:
       source:
         files:
           - OdbcJdbc-src-2.0.5.156.tar.gz
-        target: /usr/local/odbc_firebird/firebird-odbc-2.0.5.156
+        target: /usr/local/share/odbc_firebird
         build: true
         symlinks:
-          - /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/Builds/Gcc.darwin/Release_x86_64/libOdbcFb.dylib
+          - /usr/local/share/odbc_firebird/OdbcJdbc/Builds/Gcc.darwin/Release_x86_64/libOdbcFb.dylib
     driver:
       Description: Firebird ODBC driver
       Driver: /usr/local/lib/libOdbcFb.dylib
