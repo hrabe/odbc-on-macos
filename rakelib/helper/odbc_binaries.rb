@@ -7,11 +7,11 @@ module ODBC
     # helper for Application installation
     module APP
       def self.install(server)
-        puts ">>> App"
+        puts '>>> App'
       end
 
       def self.uninstall(server)
-        puts ">>> App"
+        puts '>>> App'
       end
     end
 
@@ -36,16 +36,17 @@ module ODBC
       def self.uncompress(file, target)
         case File.extname(file)
         when '.gz'
-          p "tar xvzf #{file} -C #{target}"
+          system "mkdir -p #{target}"
+          system "tar xvzf #{file} -C #{target}"
         when '.zip'
-          p "unzip #{file} -d #{target}"
+          system "unzip #{file} -d #{target}"
         else
           raise 'unknown unkompress'
         end
       end
       
       def self.install(server)
-        puts ">>> Source"
+        puts '>>> Source'
         source = SETUP::WORKBOOK[server][:odbc][:binaries][:source]
         return unless source
         files = source[:files].map{ |file| "#{ROOT_DIR}/binaries/source/#{file}" }
@@ -62,7 +63,7 @@ module ODBC
       end
 
       def self.uninstall(server)
-        puts ">>> Source"
+        puts '>>> Source'
         source = SETUP::WORKBOOK[server][:odbc][:binaries][:source]
         return unless source
         target = source[:target]
