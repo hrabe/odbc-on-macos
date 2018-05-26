@@ -151,8 +151,8 @@ mysql:
         target: /usr/local/share/odbc_mysql
         build: true
         symlinks:
-          - /usr/local/share/odbc_mysql/mysql-connector-odbc-5.3.10-src/_build/lib/libmyodbc5a.so
-          - /usr/local/share/odbc_mysql/mysql-connector-odbc-5.3.10-src/_build/lib/libmyodbc5w.so
+          - /usr/local/share/odbc_mysql/mysql-connector-odbc-5.3.10-src/Release_x86_64/lib/libmyodbc5a.so
+          - /usr/local/share/odbc_mysql/mysql-connector-odbc-5.3.10-src/Release_x86_64/lib/libmyodbc5w.so
     driver:
       Description: MySQL ODBC Unicode driver for linux
       Driver: /usr/local/lib/libmyodbc5w.so
