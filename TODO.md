@@ -12,6 +12,7 @@ The install / uninstall rake tasks do not fully work for all servers right now.
 ## Scope: Brew
 - install brew formula
 - uninstall brew formula
+- support more than one formula + options
 
 ## Scope: Source
 - install sources
