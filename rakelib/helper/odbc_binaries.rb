@@ -44,36 +44,40 @@ module ODBC
           raise 'unknown unkompress'
         end
       end
-      
+
+      def self.delete(target)
+        system "rm -rf #{target}"
+      end
+
+      def self.symlink_lib(file)
+        system "ln -s #{file} /usr/local/lib"
+      end
+
+      def self.unlink_lib(file)
+        system "rm /usr/local/lib/#{File.basename(file)}"
+      end
+
+      def self.build(server)
+        p "build: #{server}"
+      end
+
       def self.install(server)
         puts '>>> Source'
         source = SETUP::WORKBOOK[server][:odbc][:binaries][:source]
         return unless source
-        files = source[:files].map{ |file| "#{ROOT_DIR}/binaries/source/#{file}" }
-        target = source[:target]
-        symlinks = source[:symlinks]
-        # TODO: unpack (unzip or tar) to target location
-        files.each { |file| uncompress(file, target) }
-        # TODO: build if required
-        p source[:build] ? "YES" : "NO"
-        # TODO: symlink build results or binaries
-        symlinks.each do |symlink|
-          p "ln -s #{symlink} /usr/local/lib"
+        source[:files].each do |file|
+          uncompress("#{ROOT_DIR}/binaries/source/#{file}", source[:target])
         end
+        build(server) if source[:build]
+        source[:symlinks].each { |file| symlink_lib(file) }
       end
 
       def self.uninstall(server)
         puts '>>> Source'
         source = SETUP::WORKBOOK[server][:odbc][:binaries][:source]
         return unless source
-        target = source[:target]
-        symlinks = source[:symlinks]
-        # TODO: unlink build results or binaries
-        symlinks.each do |symlink|
-          p "rm /usr/local/lib/#{File.basename(symlink)}"
-        end
-        # TODO: erase the traget location
-        p "rm -rf #{target}"
+        source[:symlinks].each { |file| unlink_lib(file) }
+        delete(source[:target])
       end
     end
   end
