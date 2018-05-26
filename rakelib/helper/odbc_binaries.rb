@@ -58,11 +58,9 @@ module ODBC
       end
 
       def self.build(server)
-        p "build: #{server}"
       end
 
       def self.install(server)
-        puts '>>> Source'
         source = SETUP::WORKBOOK[server][:odbc][:binaries][:source]
         return unless source
         source[:files].each do |file|
@@ -73,7 +71,6 @@ module ODBC
       end
 
       def self.uninstall(server)
-        puts '>>> Source'
         source = SETUP::WORKBOOK[server][:odbc][:binaries][:source]
         return unless source
         source[:symlinks].each { |file| unlink_lib(file) }
