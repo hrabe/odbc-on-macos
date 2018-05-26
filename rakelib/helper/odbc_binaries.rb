@@ -39,7 +39,7 @@ module ODBC
           system "mkdir -p #{target}"
           system "tar xvzf #{file} -C #{target}"
         when '.zip'
-          system "unzip #{file} -d #{target}"
+          system "unzip -o #{file} -d #{target}"
         else
           raise 'unknown unkompress'
         end
