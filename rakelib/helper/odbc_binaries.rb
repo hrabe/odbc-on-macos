@@ -6,11 +6,11 @@ module ODBC
   module BINARIES
     # helper for Application installation
     module APP
-      def self.install(server)
+      def self.install(_server)
         puts '>>> App'
       end
 
-      def self.uninstall(server)
+      def self.uninstall(_server)
         puts '>>> App'
       end
     end
