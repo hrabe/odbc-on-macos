@@ -9,6 +9,7 @@ dependencies:
   brew: 'brew --version'
   docker: 'docker --version'
   unixodbc: 'isql --version'
+  cmake: 'cmake --version'
 mssql:
   docker:
     image: microsoft/mssql-server-linux:2017-latest
