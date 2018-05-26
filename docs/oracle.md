@@ -8,14 +8,14 @@ Download the Oracle 12.2 Instant Client Basic and ODBC packages from [Instant Cl
 Unzip both files:
 
 ```
-unzip instantclient-basic-macos.x64-12.2.0.1.0-2.zip -d /usr/local/odbc_oracle
-unzip instantclient-odbc-macos.x64-12.2.0.1.0-2.zip -d /usr/local/odbc_oracle
+unzip instantclient-basic-macos.x64-12.2.0.1.0-2.zip -d /usr/local/share/odbc_oracle
+unzip instantclient-odbc-macos.x64-12.2.0.1.0-2.zip -d /usr/local/share/odbc_oracle
 ```
 
 The Oracle Instant Client libraries need to be in the macOS library search path:
 
 ```
-cd /usr/local/odbc_oracle/instantclient_12_2
+cd /usr/local/share/odbc_oracle/instantclient_12_2
 ln -s $(pwd)/libclntsh.dylib.12.1 /usr/local/lib
 ln -s $(pwd)/libclntshcore.dylib.12.1 /usr/local/lib
 ln -s $(pwd)/libsqora.dylib.12.1 /usr/local/lib

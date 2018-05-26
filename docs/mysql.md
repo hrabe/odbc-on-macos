@@ -16,8 +16,8 @@ brew install cmake
 
 Configure and build the drivers:
 ```
-tar xvzf mysql-connector-odbc-5.3.10-src.tar.gz -C /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10
-cd /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10
+tar xvzf mysql-connector-odbc-5.3.10-src.tar.gz -C /usr/local/share/odbc_mysql
+cd /usr/local/share/odbc_mysql/mysql-connector-odbc-5.3.10-src
 mkdir _build
 cd _build
 cmake -DWITH_UNIXODBC=1 -DODBC_LIB_DIR=/usr/local/Cellar/unixodbc/2.3.6/lib -DODBC_INCLUDES=/usr/local/Cellar/unixodbc/2.3.6/include -DMYSQL_CONFIG_EXECUTABLE= ..
@@ -28,7 +28,7 @@ make myodbc5a
 The MySQL ODBC libraries need to be in the macOS library search path:
 
 ```
-cd /usr/local/odbc_mysql/mysql-connector-odbc-5.3.10/_build/lib
+cd /usr/local/share/odbc_mysql/mysql-connector-odbc-5.3.10-src/_build/lib
 ln -s $(pwd)/libmyodbc5w.so /usr/local/lib
 ln -s $(pwd)/libmyodbc5a.so /usr/local/lib
 ```

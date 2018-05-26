@@ -11,8 +11,8 @@ sudo launchctl unload -w /Library/LaunchDaemons/org.firebird.gds.plist
 ```
 Download now from [Firebird ODBC Drivers](https://github.com/FirebirdSQL/firebird-odbc-driver) the sources of [OdbcJdbc-src-2.0.5.156.tar.gz](https://sourceforge.net/projects/firebird/files/firebird-ODBC-driver/2.0.5-Release/OdbcJdbc-src-2.0.5.156.tar.gz/download)
 ```
-tar xvzf OdbcJdbc-src-2.0.5.156.tar.gz -C /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/
-cd /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/Builds/Gcc.darwin
+tar xvzf OdbcJdbc-src-2.0.5.156.tar.gz -C /usr/local/share/odbc_firebird
+cd /usr/local/share/odbc_firebird/OdbcJdbc/Builds/Gcc.darwin
 ```
 
 You have to edit the file **makefile.darwin** and do following changes:
@@ -24,7 +24,7 @@ make -B -f makefile.darwin all
 The Firebird ODBC libraries need to be in the macOS library search path:
 
 ```
-cd /usr/local/odbc_firebird/firebird-odbc-2.0.5.156/Builds/Gcc.darwin/Release_x86_64
+cd /usr/local/share/odbc_firebird/OdbcJdbc/Builds/Gcc.darwin/Release_x86_64
 ln -s $(pwd)/libOdbcFb.dylib /usr/local/lib
 ```
 
