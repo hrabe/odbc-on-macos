@@ -1,7 +1,7 @@
 #!/bin/sh
-SCRIPT=$(readlink -f "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
+SCRIPTPATH=$(cd "$(dirname "$0")"; pwd)
 echo "Unattended install of: $1"
-sudo installer -allowUntrusted -verboseR -pkg "$SCRIPTPATH/$1"
+installer -allowUntrusted -verboseR -pkg "$SCRIPTPATH/$1" -target /
 echo "Stop and prevent Launchd"
-sudo launchctl unload -w /Library/LaunchDaemons/org.firebird.gds.plist
+launchctl unload -w /Library/Frameworks/Firebird.framework/Versions/A/Resources/org.firebird.gds.plist
+

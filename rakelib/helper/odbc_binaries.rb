@@ -6,8 +6,13 @@ module ODBC
   module BINARIES
     # helper for Application installation
     module APP
-      def self.install(_server)
-        puts '>>> App'
+      def self.install(server)
+        SETUP::WORKBOOK[server][:odbc][:binaries][:app][:files].each do |file|
+          next unless File.extname(file) == '.pkg'
+          next unless File.file?("#{ROOT_DIR}/binaries/app/#{file}")
+          puts ">>> run installer for #{server}"
+          system "sudo #{ROOT_DIR}/binaries/app/#{File.basename(file, '.pkg')}.install.sh #{file}"
+        end
       end
 
       def self.uninstall(server)
