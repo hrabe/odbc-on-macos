@@ -5,6 +5,7 @@ names:
   oracle: Oracle
   mysql: MySQL
   firebird: Firebird
+  db2: IBM_DB2
 dependencies:
   brew: 'brew --version'
   docker: 'docker --version'
@@ -204,3 +205,37 @@ firebird:
       QuotedIdentifier: Yes
       SensitiveIdentifier: No
       AutoQuotedIdentifier: No
+db2:
+  docker:
+    image: cwds/db2:latest
+    environment:
+      - NOTVISIBLE: "in users profile"
+      - LICENSE: accept
+      - DB2INST1_PASSWORD: yourStrong(!)Password
+      - DB2NAME: testerdb
+    ports:
+      - public: 50000
+        private: 50000
+  odbc:
+    binaries:
+      source:
+        files:
+          - macos64_odbc_cli.tar.gz
+        target: /usr/local/share/odbc_db2
+        symlinks:
+          - /usr/local/share/odbc_db2/clidriver/lib/libdb2.dylib
+    driver:
+      Description: IBM DB2 ODBC driver
+      Driver: /usr/local/lib/libdb2.dylib
+      Dontdlclose: 1
+    dsn:
+      Description: IBM DB2 Test Server DSN
+      Driver: Driver_IBM_DB2
+      Protocol: tcpip
+      Hostname: localhost
+      Port: 50000
+      Database: testerdb
+      User: db2inst1
+      Password: yourStrong(!)Password
+      UID: db2inst1
+      PWD: yourStrong(!)Password
