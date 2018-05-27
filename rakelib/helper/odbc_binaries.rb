@@ -7,7 +7,9 @@ module ODBC
     # helper for Application installation
     module APP
       def self.install(server)
-        SETUP::WORKBOOK[server][:odbc][:binaries][:app][:files].each do |file|
+        app = SETUP::WORKBOOK[server][:odbc][:binaries][:app]
+        return unless app
+        app[:files].each do |file|
           next unless File.extname(file) == '.pkg'
           next unless File.file?("#{ROOT_DIR}/binaries/app/#{file}")
           puts ">>> run installer for #{server}"
@@ -16,7 +18,9 @@ module ODBC
       end
 
       def self.uninstall(server)
-        SETUP::WORKBOOK[server][:odbc][:binaries][:app][:files].each do |file|
+        app = SETUP::WORKBOOK[server][:odbc][:binaries][:app]
+        return unless app
+        app[:files].each do |file|
           next unless File.extname(file) == '.pkg'
           next unless File.file?("#{ROOT_DIR}/binaries/app/#{file}")
           puts ">>> run uninstaller for #{server}"
