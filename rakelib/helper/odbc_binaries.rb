@@ -10,8 +10,13 @@ module ODBC
         puts '>>> App'
       end
 
-      def self.uninstall(_server)
-        puts '>>> App'
+      def self.uninstall(server)
+        SETUP::WORKBOOK[server][:odbc][:binaries][:app][:files].each do |file|
+          next unless File.extname(file) == '.pkg'
+          next unless File.file?("#{ROOT_DIR}/binaries/app/#{file}")
+          puts ">>> run uninstaller for #{server}"
+          system "sudo #{ROOT_DIR}/binaries/app/#{File.basename(file, '.pkg')}.uninstall.sh #{file}"
+        end
       end
     end
 
