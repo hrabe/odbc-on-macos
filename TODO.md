@@ -37,8 +37,13 @@ The install / uninstall rake tasks do not fully work for all servers right now.
   - drop index
   - drop table
 
+## Scope: IBM DB2
+http://www.unixodbc.org/doc/db2.html
+http://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/macos64_odbc_cli.tar.gz
+https://github.com/ibmdb/ruby-ibmdb/issues/25
 
-## Scope Resource Links
+
+## Scope: Resource Links
 
 ### Docker Images
 - https://hub.docker.com/r/library/postgres/
