@@ -22,6 +22,10 @@ The install / uninstall rake tasks do not fully work for all servers right now.
 - unlink binaries
 - uninstall sources
 
+## Scope: ODBC
+- generate Driver names
+- generate DSN names
+
 ## Scope: Test
 - `isql DSN_MSSQL sa 'yourStrong(!)Password' -v -b < /dev/null`
 - `isql DSN_PostgreSQL postgres 'yourStrong(!)Password' -v -b < /dev/null`
