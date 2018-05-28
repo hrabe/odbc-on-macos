@@ -66,6 +66,7 @@ SQLSETPOSIROW Size.: 8
 1. [Oracle Server](https://github.com/hrabe/odbc-on-macos/blob/master/docs/oracle.md)
 1. [MySQL Server](https://github.com/hrabe/odbc-on-macos/blob/master/docs/mysql.md)
 1. [Firebird Server](https://github.com/hrabe/odbc-on-macos/blob/master/docs/firebird.md)
+1. [IBM DB2 Server](https://github.com/hrabe/odbc-on-macos/blob/master/docs/db2.md)
 1. [~~SQLite (file based, full scope)~~](https://github.com/hrabe/odbc-on-macos/blob/master/docs/sqlite.md)
 1. [~~MS Access (file based, read only)~~](https://github.com/hrabe/odbc-on-macos/blob/master/docs/msaccess.md)
 
