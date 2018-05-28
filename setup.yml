@@ -224,6 +224,13 @@ db2:
         target: /usr/local/share/odbc_db2
         symlinks:
           - /usr/local/share/odbc_db2/clidriver/lib/libdb2.dylib
+    db2cli:
+      Database: testerdb
+      Protocol: TCPIP
+      Hostname: localhost
+      ServiceName: 50000
+      uid: db2inst1
+      pwd: yourStrong(!)Password
     driver:
       Description: IBM DB2 ODBC driver
       Driver: /usr/local/lib/libdb2.dylib
@@ -239,3 +246,4 @@ db2:
       Password: yourStrong(!)Password
       UID: db2inst1
       PWD: yourStrong(!)Password
+      DMEnvAttr: SQL_ATTR_UNIXODBC_ENVATTR={DB2_CLI_DRIVER_INSTALL_PATH=/usr/local/share/odbc_db2/clidriver}
