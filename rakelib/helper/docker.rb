@@ -12,13 +12,18 @@ module DOCKER
     SETUP::WORKBOOK[server][:docker][:ports].map { |h| "-p #{h.values.join(':')}" }.join(' ')
   end
 
+  def self.privileged?(server)
+    SETUP::WORKBOOK[server][:docker][:privileged] || false
+  end
+
   def self.install(server)
     image = pull(server)
     return if container_exists?(server)
     vars = to_vars_string(server)
+    privileged = privileged?(server) ? '--privileged ' : ''
     ports = to_ports_string(server)
     name = container_name(server)
-    system "docker create #{vars} #{ports} --name #{name} #{image}"
+    system "docker create #{privileged}#{vars} #{ports} --name #{name} #{image}"
   end
 
   def self.uninstall(server)
