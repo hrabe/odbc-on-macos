@@ -71,7 +71,7 @@ module DOCKER
     name = SETUP::WORKBOOK[:names][server]
     user = SETUP::WORKBOOK[server][:odbc][:dsn][:User]
     pass = SETUP::WORKBOOK[server][:odbc][:dsn][:Password]
-    Timeout.timeout(10) do
+    Timeout.timeout(40) do
       loop do
         `isql DSN_#{name} #{user} '#{pass}' -v -b < /dev/null 2>&1`
         break if $?.to_i.zero?
