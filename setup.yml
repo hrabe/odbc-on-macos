@@ -80,6 +80,7 @@ oracle:
         files:
           - instantclient-basic-macos.x64-12.2.0.1.0-2.zip
           - instantclient-odbc-macos.x64-12.2.0.1.0-2.zip
+          - instantclient-sdk-macos.x64-12.2.0.1.0-2.zip
         target: /usr/local/share/odbc_oracle
         build: false
         symlinks:
