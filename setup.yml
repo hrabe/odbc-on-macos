@@ -226,9 +226,11 @@ db2:
       source:
         files:
           - macos64_odbc_cli.tar.gz
+          - archive-mac.tar.gz
         target: /usr/local/share/odbc_db2
         symlinks:
           - /usr/local/share/odbc_db2/clidriver/lib/libdb2.dylib
+          - /usr/local/share/odbc_db2/archive-mac/libcilkrts.5.dylib
     db2cli:
       Database: testerdb
       Protocol: TCPIP
