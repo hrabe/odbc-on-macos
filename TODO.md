@@ -41,11 +41,15 @@ The install / uninstall rake tasks do not fully work for all servers right now.
   - drop index
   - drop table
 
-## Scope: IBM DB2
-http://www.unixodbc.org/doc/db2.html
-http://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/macos64_odbc_cli.tar.gz
-https://github.com/ibmdb/ruby-ibmdb/issues/25
-
+## Scope: IBM DB2 Database
+- http://www.unixodbc.org/doc/db2.html
+- http://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/macos64_odbc_cli.tar.gz
+- https://github.com/ibmdb/ruby-ibmdb/issues/25
+- http://matthew-brett.github.io/docosx/mac_runtime_link.html
+- http://cilkplus.github.io
+- https://www.cilkplus.org/download#cilk-plus-llvm
+- `sudo install_name_tool -change mac64/libcilkrts.5.dylib /usr/local/lib/libcilkrts.5.dylib libdb2.dylib`
+- https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.db2.luw.apdv.cli.doc/doc/r0000584.html
 
 ## Scope: Resource Links
 
