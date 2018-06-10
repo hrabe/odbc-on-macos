@@ -169,10 +169,13 @@ mysql:
       OPTION: 3
 firebird:
   docker:
-    image: ihsahn/firebird-docker:2.5
+    image: jacobalberty/firebird:2.5-sc
     environment:
       - DEBIAN_FRONTEND: noninteractive
-      - FIREBIRD_PASSWORD: sysdba_passwd
+      - ISC_PASSWORD: sysdba_passwd
+      - FIREBIRD_DATABASE: test.fb
+      - FIREBIRD_USER: tester
+      - FIREBIRD_PASSWORD: tester_passwd
     ports: 
       - public: 3050
         private: 3050
