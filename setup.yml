@@ -197,9 +197,9 @@ firebird:
     dsn:
       Description: Firebird Test Server DSN
       Driver: Driver_Firebird
-      Dbname: 127.0.0.1/3050:/opt/firebird/bin/soci_test
-      User: sysdba
-      Password: sysdba_passwd
+      Dbname: 127.0.0.1/3050:/firebird/data/test.fb
+      User: tester
+      Password: tester_passwd
       Role:
       Client:
       CharacterSet: NONE
