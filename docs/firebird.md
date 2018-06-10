@@ -42,9 +42,9 @@ You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#
 [[DSN_Firebird]
 Description= Firebird Test Server DSN
 Driver= Driver_Firebird
-Dbname= 127.0.0.1/3050:/opt/firebird/bin/test
-User= sysdba
-Password= sysdba_passwd
+Dbname= 127.0.0.1/3050:/firebird/data/test.fb
+User= tester
+Password= tester_passwd
 Role= 
 Client= 
 CharacterSet= NONE
@@ -59,24 +59,24 @@ AutoQuotedIdentifier= false
 **TODO**: Describe Database creation.
 
 ## Use Firebird Server via Docker Image
-Unfortunately [Firebird Foundation](https://firebirdsql.org) doesn't support (proper working) docker images. I used the image [Firebird Sql Server 2.0 & 2.5 (Super Server)](https://hub.docker.com/r/ihsahn/firebird-docker/). For detailed description about possible environment variables please read this docker image description.
+Unfortunately [Firebird Foundation](https://firebirdsql.org) doesn't support (proper working) docker images. I used the image [Firebird SQL Database Server](https://hub.docker.com/r/jacobalberty/firebird/). For detailed description about possible environment variables please read this docker image description.
 
 ### Server connect parameter
 ```
 Servername: localhost
 Port: 3050
-User: sysdba
-Password: sysdba_passwd
+User: tester
+Password: tester_passwd
 ```
 
 ### Download Image
 ```
-docker pull ihsahn/firebird-docker:2.5
+docker pull docker pull jacobalberty/firebird:2.5-sc
 ```
 
 ### Create a Test Server Container
 ```
-docker create -e 'DEBIAN_FRONTEND=noninteractive' -e 'FIREBIRD_PASSWORD=sysdba_passwd' -e 'no_proxy=*.local, 169.254/16' -p 3050:3050 --name test-server-firebird ihsahn/firebird-docker:2.5
+docker create -e 'DEBIAN_FRONTEND=noninteractive' -e 'ISC_PASSWORD=sysdba_passwd' -e 'FIREBIRD_DATABASE=test' -e 'FIREBIRD_USER=tester' -e 'FIREBIRD_PASSWORD=tester_passwd' -e 'no_proxy=*.local, 169.254/16' -p 3050:3050 --name test-server-firebird jacobalberty/firebird:2.5-sc
 ```
 
 ### Using the Test Server Container
@@ -101,7 +101,7 @@ docker rm test-server-firebird
 [unixODBC](http://www.unixodbc.org/) comes along with a command line tool to interact with DBMS via ODBC DSN. You can run it using the DNS and Server parameter shown above:
 
 ```
-isql DSN_Firebird sysdba sysdba_passwd
+isql DSN_Firebird tester tester_passwd
 ```
 
 You should get on success case:
