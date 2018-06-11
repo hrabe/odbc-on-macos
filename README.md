@@ -61,7 +61,8 @@ SQLSETPOSIROW Size.: 8
 ```
 
 ## Manual Setup - the complete, hard way
-1. [MSSQL Server](https://github.com/hrabe/odbc-on-macos/blob/master/docs/mssql.md)
+1. [MSSQL Server](https://github.com/hrabe/odbc-on-macos/blob/master/docs/mssql.md) - using Microsoft ODBC Driver 17 for SQL Server
+1. [MSSQL Server](https://github.com/hrabe/odbc-on-macos/blob/master/docs/freetds.md) - using FreeTDS Driver for Linux & MSSQL
 1. [PostgreSQL Server](https://github.com/hrabe/odbc-on-macos/blob/master/docs/postgresql.md)
 1. [Oracle Server](https://github.com/hrabe/odbc-on-macos/blob/master/docs/oracle.md)
 1. [MySQL Server](https://github.com/hrabe/odbc-on-macos/blob/master/docs/mysql.md)

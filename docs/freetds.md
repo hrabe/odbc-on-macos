@@ -2,32 +2,56 @@
 [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) is a relational database management system developed by Microsoft.
 
 ## Install ODBC driver 
-MSSQL Server can be accessed using the [Microsoft ODBC Driver 17 for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-2017) driver available as tap for [Homebrew](https://brew.sh/):
+MSSQL Server (and also Sybase) can be accessed using the [FreeTDS](http://www.freetds.org/) driver available at [Homebrew](https://brew.sh/):
 ```
-brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
-brew update
-brew install --no-sandbox msodbcsql17 mssql-tools
+brew install freetds --with-unixodbc --with-odbc-wide --with-msdblib
+```
+
+## Edit FreeTDS configuration file
+Check the location of [freetds.conf](http://www.freetds.org/userguide/freetdsconf.htm) by run `tsql -C`. Should get as example:
+```
+Compile-time settings (established with the "configure" script)
+                            Version: freetds v1.00.91
+             freetds.conf directory: /usr/local/etc
+     MS db-lib source compatibility: no
+        Sybase binary compatibility: no
+                      Thread safety: yes
+                      iconv library: yes
+                        TDS version: 7.3
+                              iODBC: no
+                           unixodbc: yes
+              SSPI "trusted" logins: no
+                           Kerberos: no
+                            OpenSSL: yes
+                             GnuTLS: no
+                               MARS: no
+```
+
+Now edit `/usr/local/etc/freetds.conf` or the user specific `~/.freetds.conf` and append:
+```
+[Server_MSSQL_FreeTDS]
+host = localhost
+port = 1433
+tds version = 7.3
 ```
 
 ## Edit ODBC Driver Manager file
 Edit the located [odbcinst.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) (eg. `/usr/local/etc/odbcinst.ini`) and append:
 ```
-[Driver_MSSQL_Server2017]
-Description     = Microsoft ODBC Driver 17 for SQL Server
-Driver          = /usr/local/lib/libmsodbcsql.17.dylib
-Setup           = 
+[Driver_MSSQL_FreeTDS]
+Description     = FreeTDS Driver for Linux & MSSQL
+Driver          = /usr/local/lib/libtdsodbc.so
+Setup           = /usr/local/lib/libtdsodbc.so
 UsageCount      = 1
 ```
 
 ## Edit ODBC Data Source file
 You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) or user [.odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) file. As example edit your user file `~/.odbc.ini` and append:
 ```
-[DSN_MSSQL_Server2017]
-Description            = Test Server MSSQL_Server2017
-Driver                 = Driver_MSSQL_Server2017
-Server                 = 127.0.0.1
-UID                    = sa
-PWD                    = yourStrong(!)Password
+[DSN_MSSQL_FreeTDS]
+Description            = Test Server MSSQL_FreeTDS
+Driver                 = Driver_MSSQL_FreeTDS
+Servername             = Server_MSSQL_FreeTDS
 ```
 
 ## Use MSSQL Server via Docker Image
@@ -73,7 +97,7 @@ docker rm test-server-mssql
 [unixODBC](http://www.unixodbc.org/) comes along with a command line tool to interact with DBMS via ODBC DSN. You can run it using the DNS and Server parameter shown above:
 
 ```
-isql DSN_MSSQL_Server2017 sa 'yourStrong(!)Password'
+isql DSN_MSSQL_FreeTDS sa 'yourStrong(!)Password'
 ```
 
 You should get on success case:

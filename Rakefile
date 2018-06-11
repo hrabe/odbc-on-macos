@@ -43,7 +43,7 @@ end
 namespace :install do
   SETUP::WORKBOOK[:names].each_pair do |server, name|
     deps = [:dependencies, "pkg/#{server}.odbcinst.ini", "pkg/#{server}.odbc.ini"]
-    deps << 'pkg/freetds.conf' if server == :mssql
+    deps << 'pkg/freetds.conf' if server == :freetds
     deps << 'pkg/db2cli.ini' if server == :db2
     desc "Install #{name} Server"
     task server => deps do
@@ -105,7 +105,7 @@ namespace :uninstall do
       ODBC::BINARIES::BREW.uninstall(server)
       ODBC::BINARIES::APP.uninstall(server)
       ODBC::BINARIES::SOURCE.uninstall(server)
-      ODBC::FREETDS.uninstall(SETUP::WORKBOOK[server][:odbc][:dsn][:Servername].to_s) if server == :mssql
+      ODBC::FREETDS.uninstall(SETUP::WORKBOOK[server][:odbc][:dsn][:Servername].to_s) if server == :freetds
       ODBC::DB2CLI.uninstall(server) if server == :db2
     end
   end

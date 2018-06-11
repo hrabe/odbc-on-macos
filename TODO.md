@@ -41,6 +41,16 @@ The install / uninstall rake tasks do not fully work for all servers right now.
   - drop index
   - drop table
 
+## Scope: MSSQL Server
+- https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-2017
+- https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017#os-x-1011-el-capitan-macos-1012-sierra-and-macos-1013-high-sierra
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+brew update
+brew install --no-sandbox msodbcsql17 mssql-tools
+```
+
 ## Scope: IBM DB2 Database
 - http://www.unixodbc.org/doc/db2.html
 - http://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/macos64_odbc_cli.tar.gz

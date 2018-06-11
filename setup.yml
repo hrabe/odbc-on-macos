@@ -1,6 +1,7 @@
 ---
 names:
-  mssql: MSSQL
+  freetds: MSSQL_FreeTDS
+  mssql: MSSQL_Server2017
   postgres: PostgreSQL
   oracle: Oracle
   mysql: MySQL
@@ -11,7 +12,7 @@ dependencies:
   docker: 'docker --version'
   unixodbc: 'isql --version'
   cmake: 'cmake --version'
-mssql:
+freetds:
   docker:
     image: microsoft/mssql-server-linux:2017-latest
     environment:
@@ -37,9 +38,33 @@ mssql:
       Driver: /usr/local/lib/libtdsodbc.so
       Setup: /usr/local/lib/libtdsodbc.so
     dsn:
-      Description: MSSQL Test Server DSN
-      Driver: Driver_MSSQL
-      Servername: Server_MSSQL
+      Description: MSSQL_FreeTDS Test Server DSN
+      Driver: Driver_MSSQL_FreeTDS
+      Servername: Server_MSSQL_FreeTDS
+      User: sa
+      Password: yourStrong(!)Password
+mssql:
+  docker:
+    image: microsoft/mssql-server-linux:2017-latest
+    environment:
+      - ACCEPT_EULA: Y
+      - SA_PASSWORD: yourStrong(!)Password
+      - MSSQL_PID: 'Developer'
+    ports:
+      - public: 1433
+        private: 1433
+  odbc:
+    binaries:
+      brew:
+        formula: '--no-sandbox msodbcsql17 mssql-tools'
+    driver:
+      Description: Microsoft ODBC Driver 17 for SQL Server
+      Driver: /usr/local/lib/libmsodbcsql.17.dylib
+      Setup: 
+    dsn:
+      Description: MSSQL_Server2017 Test Server DSN
+      Driver: Driver_MSSQL_Server2017
+      Server: 127.0.0.1
       User: sa
       Password: yourStrong(!)Password
 postgres:
