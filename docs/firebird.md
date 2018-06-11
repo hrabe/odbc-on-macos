@@ -39,7 +39,7 @@ Driver= /usr/local/lib/libOdbcFb.dylib
 ## Edit ODBC Data Source file
 You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) or user [.odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) file. As example edit your user file `~/.odbc.ini` and append:
 ```
-[[DSN_Firebird]
+[DSN_Firebird]
 Description= Firebird Test Server DSN
 Driver= Driver_Firebird
 Dbname= 127.0.0.1/3050:/firebird/data/test.fb
@@ -55,8 +55,6 @@ QuotedIdentifier= true
 SensitiveIdentifier= false
 AutoQuotedIdentifier= false
 ```
-
-**TODO**: Describe Database creation.
 
 ## Use Firebird Server via Docker Image
 Unfortunately [Firebird Foundation](https://firebirdsql.org) doesn't support (proper working) docker images. I used the image [Firebird SQL Database Server](https://hub.docker.com/r/jacobalberty/firebird/). For detailed description about possible environment variables please read this docker image description.
