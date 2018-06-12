@@ -41,6 +41,12 @@ The install / uninstall rake tasks do not fully work for all servers right now.
   - drop index
   - drop table
 
+## Scope: Oracle
+needed to compile oracle native clients
+```
+export ORACLE_HOME=/usr/local/share/odbc_oracle/instantclient_12_2/
+```
+
 ## Scope: MSSQL Server
 - https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-2017
 - https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017#os-x-1011-el-capitan-macos-1012-sierra-and-macos-1013-high-sierra
@@ -51,6 +57,12 @@ brew update
 brew install --no-sandbox msodbcsql17 mssql-tools
 ```
 
+- https://sqlchoice.azurewebsites.net/en-us/sql-server/developer-get-started/go/mac/
+```
+HOMEBREW_NO_ENV_FILTERING=1 ACCEPT_EULA=y brew install --no-sandbox msodbcsql mssql-tools
+```
+
+
 ## Scope: IBM DB2 Database
 - http://www.unixodbc.org/doc/db2.html
 - http://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/macos64_odbc_cli.tar.gz
@@ -60,6 +72,16 @@ brew install --no-sandbox msodbcsql17 mssql-tools
 - https://www.cilkplus.org/download#cilk-plus-llvm
 - `sudo install_name_tool -change mac64/libcilkrts.5.dylib /usr/local/lib/libcilkrts.5.dylib libdb2.dylib`
 - https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.db2.luw.apdv.cli.doc/doc/r0000584.html
+
+needed to compile DB2
+```
+export DB2_DIR=/usr/local/share/odbc_db2/clidriver
+export DB2LIB=/usr/local/share/odbc_db2/archive-mac/lib/
+```
+needed to run tests against DB2
+```
+export DB2_CLI_DRIVER_INSTALL_PATH=/usr/local/share/odbc_db2/clidriver/
+```
 
 ## Scope: Resource Links
 
