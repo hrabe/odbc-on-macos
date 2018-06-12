@@ -56,6 +56,7 @@ mssql:
   odbc:
     binaries:
       brew:
+        tap: microsoft/mssql-release
         formula: '--no-sandbox msodbcsql17 mssql-tools'
     driver:
       Description: Microsoft ODBC Driver 17 for SQL Server

@@ -34,6 +34,7 @@ module ODBC
       def self.install(server)
         brew = SETUP::WORKBOOK[server][:odbc][:binaries][:brew]
         return unless brew
+        system "brew tap #{brew[:tap]}" if brew[:tap]
         options = brew.fetch(:options, []).join(' ')
         system "brew install #{brew[:formula]} #{options}"
       end
@@ -42,6 +43,7 @@ module ODBC
         brew = SETUP::WORKBOOK[server][:odbc][:binaries][:brew]
         return unless brew
         system "brew uninstall #{brew[:formula]}"
+        system "brew untap #{brew[:tap]}" if brew[:tap]
       end
     end
 
