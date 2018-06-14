@@ -121,6 +121,7 @@ Ruby Gems:
 - https://superuser.com/questions/36567/how-do-i-uninstall-any-apple-pkg-package-file
 - https://apple.stackexchange.com/questions/113489/unattended-installation-of-pkg-file
 - http://www.unixodbc.org/odbcinst.html
+- https://cmake.org/cmake/help/v3.11/generator/Visual%20Studio%208%202005.html
 
 ### Unsorted
 - https://puredata.info/downloads/gem/documentation/faq/getdlldependencies
