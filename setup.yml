@@ -195,7 +195,7 @@ mysql:
       OPTION: 3
 firebird:
   docker:
-    image: jacobalberty/firebird:2.5-sc
+    image: jacobalberty/firebird:3.0.3
     environment:
       - DEBIAN_FRONTEND: noninteractive
       - ISC_PASSWORD: sysdba_passwd
@@ -209,7 +209,7 @@ firebird:
     binaries:
       app:
         files:
-          - FirebirdCS-2.5.8-27089-1-x86_64.pkg
+          - Firebird-3.0.3-32900-x86_64.pkg
       source:
         files:
           - OdbcJdbc-src-2.0.5.156.tar.gz
@@ -228,7 +228,7 @@ firebird:
       Password: tester_passwd
       Role:
       Client:
-      CharacterSet: NONE
+      CharacterSet: UTF-8
       ReadOnly: No
       NoWait: No
       Dialect: 3
