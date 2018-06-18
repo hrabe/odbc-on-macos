@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'yaml'
-require 'pp'
 
 # Helper for setup.yml workbook
 module SETUP
