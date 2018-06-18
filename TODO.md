@@ -82,6 +82,11 @@ needed to run tests against DB2
 ```
 export DB2_CLI_DRIVER_INSTALL_PATH=/usr/local/share/odbc_db2/clidriver/
 ```
+https://bugs.php.net/bug.php?id=54007
+https://www.ibm.com/support/knowledgecenter/en/ssw_i5_54/rzaik/rzaikodbcapifunctions.htm#odbcapifunctions
+
+> The way in which some functions are implemented in the iSeries Access ODBC Driver does not meet the specifications in the Microsoft® ODBC Software Development Kit Programmer's Reference.
+> 
 
 ## Scope: Resource Links
 
