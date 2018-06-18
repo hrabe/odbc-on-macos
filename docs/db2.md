@@ -41,7 +41,7 @@ pwd= yourStrong(!)Password
 
 You can either use the system [odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) or user [.odbc.ini](https://github.com/hrabe/odbc-on-macos#locate-your-odbc-driver-and-data-source-config-files) file. As example edit your user file `~/.odbc.ini` and append:
 ```
-[[DSN_IBM_DB2]
+[DSN_IBM_DB2]
 Description= IBM DB2 Test Server DSN
 Driver= Driver_IBM_DB2
 Protocol= tcpip
