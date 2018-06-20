@@ -172,7 +172,7 @@ mysql:
   odbc:
     binaries:
       brew:
-        formula: mysql
+        formula: mysql@5.7
       source:
         files:
           - mysql-connector-odbc-5.3.10-src.tar.gz
