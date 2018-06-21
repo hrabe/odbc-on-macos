@@ -5,7 +5,7 @@
 Unfortunately the driver must be compiled from C/C++ sources. This requires the Header and Lib files from MySQL Server.
 MySql Server is available at [Homebrew](https://brew.sh/):
 ```
-brew install mysql
+brew install mysql@5.7
 ```
 You will also need [cmake](https://cmake.org) installed. It's available at [Homebrew](https://brew.sh/) as well:
 ```
@@ -20,7 +20,14 @@ tar xvzf mysql-connector-odbc-5.3.10-src.tar.gz -C /usr/local/share/odbc_mysql
 cd /usr/local/share/odbc_mysql/mysql-connector-odbc-5.3.10-src
 mkdir _build
 cd _build
-cmake -DWITH_UNIXODBC=1 -DODBC_LIB_DIR=/usr/local/Cellar/unixodbc/2.3.6/lib -DODBC_INCLUDES=/usr/local/Cellar/unixodbc/2.3.6/include -DMYSQL_LIBRARIES='mysql_sys;mysql_strings;mysqlclient' -DMYSQL_CONFIG_EXECUTABLE= ..
+cmake \
+  -DWITH_UNIXODBC=1 \
+  -DODBC_LIB_DIR=/usr/local/Cellar/unixodbc/2.3.6/lib \
+  -DODBC_INCLUDES=/usr/local/Cellar/unixodbc/2.3.6/include \
+  -DMYSQL_LIB_DIR=/usr/local/opt/mysql@5.7/lib \
+  -DMYSQL_INCLUDE_DIR=/usr/local/opt/mysql@5.7/include/mysql \
+  -DMYSQL_LIBRARIES='mysql_sys;mysql_strings;mysqlclient' \
+  -DMYSQL_CONFIG_EXECUTABLE= ..
 make myodbc5w
 make myodbc5a
 ```
